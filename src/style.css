@@ -4,9 +4,83 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
     display: grid;
-    grid-template-columns: ;
+    grid-template-columns: 1fr 4fr;
+    background-color: #fffaec;
+}
+
+nav, main {
+    margin: 25px;
 }
 
 header {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #3d3d3d;
 }
+
+section {
+    color: #578e7e;
+}
+
+.main--section {
+    margin: 25px;
+}
+
+.todo--container {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: 1fr 5fr 2fr 2fr 1fr 1fr;
+    column-gap: 5px;
+    margin-bottom: 10px;
+    font-size: .75em;
+    background-color: #f5ecd5;
+    border-radius: 25px;
+}
+
+.todo--name {
+    justify-self: start;
+}
+
+.checkbox--complete-status {
+    appearance: none;
+    cursor: pointer;
+    margin: 10px;
+    border: 1px solid #3d3d3d;
+    border-radius: 50%;
+}
+
+.checkbox--complete-status:checked {
+    background-color: #578e7e;
+}
+
+/* .checkbox--complete-status:hover {
+    background-color: #b9d4cc;
+} */
+
+.todo--edit,
+.todo--delete {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    background-color: #f5ecd5;
+}
+
+img {
+    width: 3em;
+}
+
+main input,
+header button,
+section button {
+    height: 25px;
+    width: 25px;
+}
+
+main header input {
+    margin: 0;
+}
+
