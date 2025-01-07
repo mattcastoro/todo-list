@@ -8,8 +8,13 @@ body {
     background-color: #fffaec;
 }
 
-nav, main {
-    margin: 25px;
+nav {
+    padding: 25px;
+    background-color: #f5ecd5;
+}
+
+main {
+    margin: 50px;
 }
 
 header {
@@ -17,6 +22,36 @@ header {
     justify-content: space-between;
     align-items: center;
     color: #3d3d3d;
+    font-size: 1.5em;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    background-color: #f5ecd5;
+    padding: 10px;
+    border-radius: 0 25px 25px 0;
+    border-left: 1px solid #3d3d3d;
+}
+
+#checkbox--make-default {
+    appearance: none;
+    cursor: pointer;
+    border: 1px solid #3d3d3d;
+    border-radius: 50%;
+}
+
+#checkbox--make-default:checked {
+    background-color: #3d3d3d;
+}
+
+#checkbox--make-default:hover {
+    background-color: #3d3d3d;
+}
+
+header label {
+    font-size: .4em;
 }
 
 section {
@@ -55,18 +90,28 @@ section {
     background-color: #578e7e;
 }
 
-/* .checkbox--complete-status:hover {
-    background-color: #b9d4cc;
-} */
+.checkbox--complete-status:hover {
+    background-color: #578e7e;
+}
 
 .todo--edit,
-.todo--delete {
+.todo--delete,
+.btn--add-list {
     display: grid;
     align-content: center;
     justify-content: center;
     border: none;
     cursor: pointer;
     background-color: #f5ecd5;
+}
+
+.btn--add-todo {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    background-color: #fffaec;
 }
 
 img {
