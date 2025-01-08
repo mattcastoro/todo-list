@@ -65,5 +65,22 @@
             <button type="button" class="btn--delete-list">Delete List</button>
         </footer>
     </main>
+    <dialog class="dialog--new-list">
+        <div class="new-list--heading">New List</div>
+        <form class="new-list--form">
+            <label class="form--list-name">
+                Name
+                <input type="text" name="list-name" required>
+            </label>
+            <label class="form--make-default">
+                Make default
+                <input type="checkbox" name="make-default">
+            </label>
+        </form>
+        <div class="new-list--btn-container">
+            <button type="button" class="new-list--btn--cancel">Cancel</button>
+            <button type="button" class="new-list--btn--add">Add</button>
+        </div>
+    </dialog>
 </body>
 </html>
