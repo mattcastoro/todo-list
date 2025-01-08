@@ -1,16 +1,40 @@
 body {
     box-sizing: border-box;
-    margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
     display: grid;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 1fr 3fr;
     background-color: #fffaec;
 }
 
 nav {
-    padding: 25px;
+    padding: 25px 0 25px 25px;
     background-color: #f5ecd5;
+    border-radius: 25px 0 0 25px;
+}
+
+.nav--section {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0 15px 15px;
+}
+
+nav section button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 10px;
+    color: #578e7e;
+    background-color: #f5ecd5;
+    font-size: .85em;
+    padding: 15px 10px;
+    border: none;
+    border-radius: 25px 0 0 25px;
+    cursor: pointer;
+}
+
+nav section button:hover {
+    background-color: #fffaec;
 }
 
 main {
@@ -26,14 +50,17 @@ header {
     font-size: 1.5em;
 }
 
+main header input {
+    margin: 0;
+}
+
 .checkbox-container {
     display: flex;
     align-items: center;
     column-gap: 5px;
     background-color: #f5ecd5;
     padding: 10px;
-    border-radius: 0 25px 25px 0;
-    border-left: 1px solid #3d3d3d;
+    border-radius: 25px;
 }
 
 #checkbox--make-default {
@@ -75,10 +102,6 @@ section {
     border-radius: 25px;
 }
 
-.todo--name {
-    justify-self: start;
-}
-
 .checkbox--complete-status {
     appearance: none;
     cursor: pointer;
@@ -93,6 +116,10 @@ section {
 
 .checkbox--complete-status:hover {
     background-color: #578e7e;
+}
+
+.todo--name {
+    justify-self: start;
 }
 
 .todo--edit,
@@ -121,13 +148,9 @@ img {
 
 main input,
 header button,
-section button {
+main section button {
     height: 25px;
     width: 25px;
-}
-
-main header input {
-    margin: 0;
 }
 
 footer {
