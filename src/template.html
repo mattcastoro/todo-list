@@ -65,7 +65,7 @@
             <button type="button" class="btn--delete-list">Delete List</button>
         </footer>
     </main>
-    <dialog class="dialog--new-list">
+    <!-- <dialog class="dialog--new-list">
         <div class="new-list--heading">New List</div>
         <form class="new-list--form">
             <label class="form--list-name">
@@ -81,8 +81,8 @@
             <button type="button" class="new-list--btn--cancel">Cancel</button>
             <button type="button" class="new-list--btn--add">Add</button>
         </div>
-    </dialog>
-    <dialog class="dialog--new-todo">
+    </dialog> -->
+    <!-- <dialog class="dialog--new-todo">
         <div class="new-todo--heading">New Todo</div>
         <form class="new-todo--form">
             <label class="form--todo-name">
@@ -93,9 +93,25 @@
                 Description
                 <textarea rows="2"></textarea>
             </label>
-            
+            <label class="form--todo-due-date">
+                Due Date
+                <input type="date" name="todo-due-date">
+            </label>
+            <label class="form--todo-priority">
+                Priority
+                <select>
+                    <option value="none"></option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </label>
         </form>
-    </dialog>
+        <div class="new-todo--btn-container">
+            <button type="button" class="new-todo--btn--cancel">Cancel</button>
+            <button type="button" class="new-todo--btn--add">Add</button>
+        </div>
+    </dialog> -->
     <!-- <dialog class="dialog--delete-list">
         <div class="delete-list--heading">
             Confirm the deletion of this list.

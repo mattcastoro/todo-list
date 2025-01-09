@@ -164,6 +164,8 @@ footer {
 .btn--delete-list,
 .new-list--btn--cancel,
 .new-list--btn--add,
+.new-todo--btn--cancel,
+.new-todo--btn--add,
 .delete-list--btn--cancel,
 .delete-list--btn--delete,
 .delete-todo--btn--cancel,
@@ -179,6 +181,8 @@ footer {
 .btn--delete-list:hover,
 .new-list--btn--cancel:hover,
 .new-list--btn--add:hover,
+.new-todo--btn--cancel:hover,
+.new-todo--btn--add:hover,
 .delete-list--btn--cancel:hover,
 .delete-list--btn--delete:hover,
 .delete-todo--btn--cancel:hover,
@@ -232,7 +236,9 @@ footer {
 
 .new-list--form input[type="text"],
 .new-todo--form input[type="text"],
-.new-todo--form textarea {
+.new-todo--form textarea,
+.new-todo--form input[type="date"],
+.new-todo--form select {
     background-color: #f5ecd5;
     border: 1px solid #f5ecd5;
     border-radius: 25px;
@@ -242,7 +248,9 @@ footer {
 
 .new-list--form input[type="text"]:focus,
 .new-todo--form input[type="text"]:focus,
-.new-todo--form textarea:focus {
+.new-todo--form textarea:focus,
+.new-todo--form input[type="date"]:focus,
+.new-todo--form select:focus {
     outline: none;
     border: 1px solid #578e7e;
 }
@@ -276,4 +284,8 @@ footer {
 .delete-list--btn-container,
 .delete-todo--btn-container {
     justify-self: end;
+}
+
+.new-todo--form select {
+    cursor: pointer;
 }
