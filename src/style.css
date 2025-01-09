@@ -4,7 +4,7 @@ body {
     font-size: 20px;
     display: grid;
     grid-template-columns: 1fr 3fr;
-    background-color: #fffaec;
+    background-color: #fffcf5;
     position: relative;
 }
 
@@ -29,7 +29,7 @@ nav section button {
     background-color: #f5ecd5;
     font-size: .85em;
     padding: 15px 10px;
-    border: none;
+    border: 2px solid #f5ecd5;
     border-radius: 25px 0 0 25px;
     cursor: pointer;
 }
@@ -41,9 +41,10 @@ nav section button:hover {
 main {
     display: grid;
     padding: 50px;
-    border: 2px solid #f5ecd5;
+    border: 5px solid #f5ecd5;
     border-left: none;
     border-radius: 0 25px 25px 0;
+    background-color: #fffaec;
 }
 
 header {
@@ -106,7 +107,7 @@ section {
     border-radius: 25px;
 }
 
-.checkbox--complete-status {
+.displayed-todo--checkbox--complete-status {
     appearance: none;
     cursor: pointer;
     margin: 10px;
@@ -114,11 +115,11 @@ section {
     border-radius: 50%;
 }
 
-.checkbox--complete-status:checked {
+.displayed-todo--checkbox--complete-status:checked {
     background-color: #578e7e;
 }
 
-.checkbox--complete-status:hover {
+.displayed-todo--checkbox--complete-status:hover {
     background-color: #578e7e;
 }
 
@@ -126,9 +127,9 @@ section {
     justify-self: start;
 }
 
-.todo--edit,
-.todo--delete,
-.btn--add-list {
+.displayed-todo--btn--edit,
+.displayed-todo--btn--delete,
+.my-lists--btn--show-add-list {
     display: grid;
     align-content: center;
     justify-content: center;
@@ -137,7 +138,7 @@ section {
     background-color: #f5ecd5;
 }
 
-.btn--add-todo {
+.displayed-list--btn--add-todo {
     display: grid;
     align-content: center;
     justify-content: center;
@@ -146,8 +147,18 @@ section {
     background-color: #fffaec;
 }
 
-img {
+nav header img {
+    padding-right: 20px;
+}
+
+header img {
     width: 3em;
+    align-self: center;
+}
+
+img {
+    width: 2em;
+    align-self: center;
 }
 
 main input,
@@ -161,7 +172,7 @@ footer {
     justify-self: end;
 }
 
-.btn--delete-list,
+.displayed-list--btn--delete-list,
 .new-list--btn--cancel,
 .new-list--btn--add,
 .new-todo--btn--cancel,
@@ -173,12 +184,12 @@ footer {
     color: #fffaec;
     background-color: #3d3d3d;
     padding: 5px 15px;
-    border: 1px solid #3d3d3d;
+    border: 2px solid #3d3d3d;
     border-radius: 25px;
     cursor: pointer;
 }
 
-.btn--delete-list:hover,
+.displayed-list--btn--delete-list:hover,
 .new-list--btn--cancel:hover,
 .new-list--btn--add:hover,
 .new-todo--btn--cancel:hover,
@@ -189,17 +200,20 @@ footer {
 .delete-todo--btn--delete:hover {
     color: #3d3d3d;
     background-color: #fffaec;
-    border: 1px solid #3d3d3d;
+    border: 2px solid #3d3d3d;
 }
 
-.dialog--new-list,
-.dialog--new-todo,
-.dialog--delete-list,
-.dialog--delete-todo {
+.dialog--new-list[open],
+.dialog--new-todo[open],
+.dialog--delete-list[open],
+.dialog--delete-todo[open] {
     position: absolute;
-    top: 25px;
+    /* top: 25px;
     left: 0;
-    right: 0;
+    right: 0; */
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
     padding: 50px;
     border: none;
     border-radius: 25px;
@@ -240,7 +254,7 @@ footer {
 .new-todo--form input[type="date"],
 .new-todo--form select {
     background-color: #f5ecd5;
-    border: 1px solid #f5ecd5;
+    border: 2px solid #f5ecd5;
     border-radius: 25px;
     padding: 5px 15px;
     color: #3d3d3d;
@@ -250,9 +264,25 @@ footer {
 .new-todo--form input[type="text"]:focus,
 .new-todo--form textarea:focus,
 .new-todo--form input[type="date"]:focus,
-.new-todo--form select:focus {
+.new-todo--form select:focus,
+.my-lists--btn--show-add-list:focus,
+.displayed-list--btn--add-todo:focus,
+.section--list-tab:focus,
+#checkbox--make-default:focus,
+.displayed-todo--checkbox--complete-status:focus,
+.displayed-todo--btn--edit:focus,
+.displayed-todo--btn--delete:focus,
+.displayed-list--btn--delete-list:focus,
+.new-list--btn--cancel:focus,
+.new-list--btn--add:focus,
+.new-todo--btn--cancel:focus,
+.new-todo--btn--add:focus,
+.delete-list--btn--cancel:focus,
+.delete-list--btn--delete:focus,
+.delete-todo--btn--cancel:focus,
+.delete-todo--btn--delete:focus {
     outline: none;
-    border: 1px solid #578e7e;
+    border: 2px solid #578e7e;
 }
 
 .new-list--form input[type="checkbox"] {

@@ -9,7 +9,7 @@
     <nav>
         <header>
             <div>My Lists</div>
-            <button type="button" class="btn--add-list"><img src="/src/assets/icon--add.svg" alt="+" title="add list"></button>
+            <button type="button" class="my-lists--btn--show-add-list" id="show--add-list-dialog"><img src="/src/assets/icon--add.svg" alt="+" title="add list"></button>
         </header>
         <section class="nav--section">
             <button class="section--list-tab">
@@ -33,39 +33,39 @@
                 <label for="checkbox--make-default">make default</label>
             </div>
             <div class="main--title">Groceries</div>
-            <button type="button" class="btn--add-todo"><img src="/src/assets/icon--add.svg" alt="+" title="add todo"></button>
+            <button type="button" class="displayed-list--btn--add-todo"><img src="/src/assets/icon--add.svg" alt="+" title="add todo"></button>
         </header>
         <section class="main--section">
             <div class="todo--container">
-                <input type="checkbox" class="checkbox--complete-status" id="checkbox--complete-status" name="complete-status">
+                <input type="checkbox" class="displayed-todo--checkbox--complete-status" id="displayed-todo--checkbox--complete-status" name="complete-status">
                 <div class="todo--name">Pick up watermelons from Steve's</div>
                 <div class="todo--due-date">1/4/2025</div>
                 <div class="todo--priority">Medium</div>
-                <button type="button" class="todo--edit"><img src="/src/assets/icon--view-todo.svg" alt="oo" title="edit"></button>
-                <button type="button" class="todo--delete"><img src="/src/assets/icon--delete-todo.svg" alt="x" title="delete"></button>
+                <button type="button" class="displayed-todo--btn--edit"><img src="/src/assets/icon--view-todo.svg" alt="oo" title="edit"></button>
+                <button type="button" class="displayed-todo--btn--delete"><img src="/src/assets/icon--delete-todo.svg" alt="x" title="delete"></button>
             </div>
             <div class="todo--container">
-                <input type="checkbox" class="checkbox--complete-status" id="checkbox--complete-status" name="complete-status">
+                <input type="checkbox" class="displayed-todo--checkbox--complete-status" id="displayed-todo--checkbox--complete-status" name="complete-status">
                 <div class="todo--name">Buy honeycrisp apples for party</div>
                 <div class="todo--due-date">1/15/2025</div>
                 <div class="todo--priority">High</div>
-                <button type="button" class="todo--edit"><img src="/src/assets/icon--view-todo.svg" alt="oo" title="edit"></button>
-                <button type="button" class="todo--delete"><img src="/src/assets/icon--delete-todo.svg" alt="x" title="delete"></button>
+                <button type="button" class="displayed-todo--btn--edit"><img src="/src/assets/icon--view-todo.svg" alt="oo" title="edit"></button>
+                <button type="button" class="displayed-todo--btn--delete"><img src="/src/assets/icon--delete-todo.svg" alt="x" title="delete"></button>
             </div>
             <div class="todo--container">
-                <input type="checkbox" class="checkbox--complete-status" id="checkbox--complete-status" name="complete-status">
+                <input type="checkbox" class="displayed-todo--checkbox--complete-status" id="displayed-todo--checkbox--complete-status" name="complete-status">
                 <div class="todo--name">Drop off table napkins</div>
                 <div class="todo--due-date">1/12/2025</div>
                 <div class="todo--priority">Low</div>
-                <button type="button" class="todo--edit"><img src="/src/assets/icon--view-todo.svg" alt="oo" title="edit"></button>
-                <button type="button" class="todo--delete"><img src="/src/assets/icon--delete-todo.svg" alt="x" title="delete"></button>
+                <button type="button" class="displayed-todo--btn--edit"><img src="/src/assets/icon--view-todo.svg" alt="oo" title="edit"></button>
+                <button type="button" class="displayed-todo--btn--delete"><img src="/src/assets/icon--delete-todo.svg" alt="x" title="delete"></button>
             </div>
         </section>
         <footer>
-            <button type="button" class="btn--delete-list">Delete List</button>
+            <button type="button" class="displayed-list--btn--delete-list">Delete List</button>
         </footer>
     </main>
-    <!-- <dialog class="dialog--new-list">
+    <dialog id="dialog--new-list" class="dialog--new-list">
         <div class="new-list--heading">New List</div>
         <form class="new-list--form">
             <label class="form--list-name">
@@ -81,8 +81,8 @@
             <button type="button" class="new-list--btn--cancel">Cancel</button>
             <button type="button" class="new-list--btn--add">Add</button>
         </div>
-    </dialog> -->
-    <!-- <dialog class="dialog--new-todo">
+    </dialog>
+    <dialog class="dialog--new-todo">
         <div class="new-todo--heading">New Todo</div>
         <form class="new-todo--form">
             <label class="form--todo-name">
@@ -111,8 +111,8 @@
             <button type="button" class="new-todo--btn--cancel">Cancel</button>
             <button type="button" class="new-todo--btn--add">Add</button>
         </div>
-    </dialog> -->
-    <!-- <dialog class="dialog--delete-list">
+    </dialog>
+    <dialog class="dialog--delete-list">
         <div class="delete-list--heading">
             Confirm the deletion of this list.
         </div>
@@ -120,8 +120,8 @@
             <button type="button" class="delete-list--btn--cancel">Cancel</button>
             <button type="button" class="delete-list--btn--delete">Delete</button>
         </div>
-    </dialog> -->
-    <!-- <dialog class="dialog--delete-todo">
+    </dialog>
+    <dialog class="dialog--delete-todo">
         <div class="delete-todo--heading">
             Confirm the deletion of this todo.
         </div>
@@ -129,6 +129,6 @@
             <button type="button" class="delete-todo--btn--cancel">Cancel</button>
             <button type="button" class="delete-todo--btn--delete">Delete</button>
         </div>
-    </dialog> -->
+    </dialog>
 </body>
 </html>
