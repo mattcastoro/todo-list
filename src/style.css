@@ -5,22 +5,31 @@ body {
     display: grid;
     grid-template-columns: 1fr 3fr;
     background-color: #fffcf5;
+    color: #578e7e;
     position: relative;
 }
 
-nav {
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #3d3d3d;
+    font-size: 1.5em;
+}
+
+.nav-container {
     padding: 25px 0 25px 25px;
     background-color: #f5ecd5;
     border-radius: 25px 0 0 25px;
 }
 
-.nav--section {
+.lists-section {
     display: flex;
     flex-direction: column;
     margin: 15px 0 15px 15px;
 }
 
-nav section button {
+.list-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -34,11 +43,11 @@ nav section button {
     cursor: pointer;
 }
 
-nav section button:hover {
+.list-container:hover {
     background-color: #fffaec;
 }
 
-main {
+.main-container {
     display: grid;
     padding: 50px;
     border: 5px solid #f5ecd5;
@@ -47,55 +56,38 @@ main {
     background-color: #fffaec;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #3d3d3d;
-    font-size: 1.5em;
-}
-
-main header input {
-    margin: 0;
-}
-
-.checkbox-container {
+.make-default-container {
     display: flex;
     align-items: center;
     column-gap: 5px;
     background-color: #f5ecd5;
     padding: 10px;
     border-radius: 25px;
+    font-size: .4em;
 }
 
-#checkbox--make-default {
+.checkbox {
     appearance: none;
     cursor: pointer;
     border: 1px solid #3d3d3d;
     border-radius: 50%;
+    height: 25px;
+    width: 25px;
 }
 
-#checkbox--make-default:checked {
+.make-default-checkbox:checked {
     background-color: #3d3d3d;
 }
 
-#checkbox--make-default:hover {
+.make-default-checkbox:hover {
     background-color: #3d3d3d;
 }
 
-header label {
-    font-size: .4em;
-}
-
-section {
-    color: #578e7e;
-}
-
-.main--section {
+.todos-container {
     margin: 25px;
 }
 
-.todo--container {
+.todo-container {
     display: grid;
     align-items: center;
     justify-items: center;
@@ -107,29 +99,20 @@ section {
     border-radius: 25px;
 }
 
-.displayed-todo--checkbox--complete-status {
-    appearance: none;
-    cursor: pointer;
+.todo-checkbox {
     margin: 10px;
-    border: 1px solid #3d3d3d;
-    border-radius: 50%;
 }
 
-.displayed-todo--checkbox--complete-status:checked {
+.todo-checkbox:checked,
+.todo-checkbox:hover {
     background-color: #578e7e;
 }
 
-.displayed-todo--checkbox--complete-status:hover {
-    background-color: #578e7e;
-}
-
-.todo--name {
+.todo-name {
     justify-self: start;
 }
 
-.displayed-todo--btn--edit,
-.displayed-todo--btn--delete,
-.my-lists--btn--show-add-list {
+.imgBtn {
     display: grid;
     align-content: center;
     justify-content: center;
@@ -138,49 +121,19 @@ section {
     background-color: #f5ecd5;
 }
 
-.displayed-list--btn--add-todo {
-    display: grid;
-    align-content: center;
-    justify-content: center;
-    border: none;
-    cursor: pointer;
+.show-add-todo {
     background-color: #fffaec;
-}
-
-nav header img {
-    padding-right: 20px;
 }
 
 header img {
     width: 3em;
-    align-self: center;
 }
 
 img {
     width: 2em;
-    align-self: center;
 }
 
-main input,
-header button,
-main section button {
-    height: 25px;
-    width: 25px;
-}
-
-footer {
-    justify-self: end;
-}
-
-.displayed-list--btn--delete-list,
-.new-list--btn--cancel,
-.new-list--btn--add,
-.new-todo--btn--cancel,
-.new-todo--btn--add,
-.delete-list--btn--cancel,
-.delete-list--btn--delete,
-.delete-todo--btn--cancel,
-.delete-todo--btn--delete {
+.btn {
     color: #fffaec;
     background-color: #3d3d3d;
     padding: 5px 15px;
@@ -189,28 +142,14 @@ footer {
     cursor: pointer;
 }
 
-.displayed-list--btn--delete-list:hover,
-.new-list--btn--cancel:hover,
-.new-list--btn--add:hover,
-.new-todo--btn--cancel:hover,
-.new-todo--btn--add:hover,
-.delete-list--btn--cancel:hover,
-.delete-list--btn--delete:hover,
-.delete-todo--btn--cancel:hover,
-.delete-todo--btn--delete:hover {
+.btn:hover {
     color: #3d3d3d;
     background-color: #fffaec;
     border: 2px solid #3d3d3d;
 }
 
-.dialog--new-list[open],
-.dialog--new-todo[open],
-.dialog--delete-list[open],
-.dialog--delete-todo[open] {
+.dialog[open] {
     position: absolute;
-    /* top: 25px;
-    left: 0;
-    right: 0; */
     margin-top: 25px;
     margin-left: auto;
     margin-right: auto;
@@ -223,16 +162,12 @@ footer {
     row-gap: 25px;
 }
 
-.new-list--heading,
-.new-todo--heading,
-.delete-list--heading,
-.delete-todo--heading {
+.dialog-heading {
     font-size: 1.25em;
     color: #3d3d3d;
 }
 
-.new-list--form,
-.new-todo--form {
+.form {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -241,18 +176,13 @@ footer {
     color: #578e7e;
 }
 
-.new-list--form label,
-.new-todo--form label {
+.form label {
     display: flex;
     align-items: center;
     column-gap: 10px;
 }
 
-.new-list--form input[type="text"],
-.new-todo--form input[type="text"],
-.new-todo--form textarea,
-.new-todo--form input[type="date"],
-.new-todo--form select {
+.form .input {
     background-color: #f5ecd5;
     border: 2px solid #f5ecd5;
     border-radius: 25px;
@@ -260,62 +190,32 @@ footer {
     color: #3d3d3d;
 }
 
-.new-list--form input[type="text"]:focus,
-.new-todo--form input[type="text"]:focus,
-.new-todo--form textarea:focus,
-.new-todo--form input[type="date"]:focus,
-.new-todo--form select:focus,
-.my-lists--btn--show-add-list:focus,
-.displayed-list--btn--add-todo:focus,
-.section--list-tab:focus,
-#checkbox--make-default:focus,
-.displayed-todo--checkbox--complete-status:focus,
-.displayed-todo--btn--edit:focus,
-.displayed-todo--btn--delete:focus,
-.displayed-list--btn--delete-list:focus,
-.new-list--btn--cancel:focus,
-.new-list--btn--add:focus,
-.new-todo--btn--cancel:focus,
-.new-todo--btn--add:focus,
-.delete-list--btn--cancel:focus,
-.delete-list--btn--delete:focus,
-.delete-todo--btn--cancel:focus,
-.delete-todo--btn--delete:focus {
-    outline: none;
-    border: 2px solid #578e7e;
-}
-
-.new-list--form input[type="checkbox"] {
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
+.form .checkbox {
     margin: 10px;
     border: 1px solid #f5ecd5;
-    border-radius: 50%;
     background-color: #f5ecd5;
 }
 
-.new-list--form input[type="checkbox"]:focus {
-    outline: none;
-    border: 1px solid #578e7e;
-}
-
-.new-list--form input[type="checkbox"]:hover {
+.form .checkbox:hover {
     background-color: #3d3d3d;
 }
 
-.new-list--form input[type="checkbox"]:checked {
+.form .checkbox:checked {
     background-color: #3d3d3d;
 }
 
-.new-list--btn-container,
-.new-todo--btn-container,
-.delete-list--btn-container,
-.delete-todo--btn-container {
+.footBtn {
     justify-self: end;
 }
 
-.new-todo--form select {
+.dropBtn {
     cursor: pointer;
+}
+
+.foc:focus,
+.checkbox:focus,
+.imgBtn:focus,
+.btn:focus {
+    outline: none;
+    /* border: 2px solid #578e7e; */
 }

@@ -6,100 +6,100 @@
     <title>My Lists</title>
 </head>
 <body>
-    <nav>
-        <header>
+    <nav class="nav-container">
+        <header class="header-container">
             <div>My Lists</div>
-            <button type="button" class="my-lists--btn--show-add-list" id="show--add-list-dialog"><img src="/src/assets/icon--add.svg" alt="+" title="add list"></button>
+            <button type="button" class="fc imgBtn"><img src="/src/assets/icon--add.svg" alt="+" title="add list" id="show-add-list"></button>
         </header>
-        <section class="nav--section">
-            <button class="section--list-tab">
-                <div class="tab-list--name">Groceries</div>
-                <div class="tab-list--count">20</div>
+        <section class="lists-section">
+            <button class="fc foc list-container" id="show-list-tab">
+                <div class="list-name">Groceries</div>
+                <div class="list-count">20</div>
             </button>
-            <button class="section--list-tab">
-                <div class="tab-list--name">Home Improvement</div>
-                <div class="tab-list--count">34</div>
+            <button class="fc foc list-container" id="show-list-tab">
+                <div class="list-name">Home Improvement</div>
+                <div class="list-count">34</div>
             </button>
-            <button class="section--list-tab">
-                <div class="tab-list--name">Wishlist</div>
-                <div class="tab-list--count">5</div>
+            <button class="fc foc list-container" id="show-list-tab">
+                <div class="list-name">Wishlist</div>
+                <div class="list-count">5</div>
             </button>
         </section>
     </nav>
-    <main>
-        <header>
-            <div class="checkbox-container">
-                <input type="checkbox" id="checkbox--make-default" name="make-default">
-                <label for="checkbox--make-default">make default</label>
+    <main class="main-container">
+        <header class="header-container">
+            <div class="fc make-default-container">
+                <input type="checkbox" class="checkbox make-default-checkbox" id="make-displayed-list-default" name="make-default">
+                <label for="make-displayed-list-default">make default</label>
             </div>
             <div class="main--title">Groceries</div>
-            <button type="button" class="displayed-list--btn--add-todo"><img src="/src/assets/icon--add.svg" alt="+" title="add todo"></button>
+            <button type="button" class="fc imgBtn show-add-todo"><img src="/src/assets/icon--add.svg" alt="+" title="add todo" id="show-add-todo"></button>
         </header>
-        <section class="main--section">
-            <div class="todo--container">
-                <input type="checkbox" class="displayed-todo--checkbox--complete-status" id="displayed-todo--checkbox--complete-status" name="complete-status">
-                <div class="todo--name">Pick up watermelons from Steve's</div>
+        <section class="todos-container">
+            <div class="todo-container">
+                <input type="checkbox" class="fc checkbox todo-checkbox" id="todo-checkbox" name="complete-status">
+                <div class="todo-name">Pick up watermelons from Steve's</div>
                 <div class="todo--due-date">1/4/2025</div>
                 <div class="todo--priority">Medium</div>
-                <button type="button" class="displayed-todo--btn--edit"><img src="/src/assets/icon--view-todo.svg" alt="oo" title="edit"></button>
-                <button type="button" class="displayed-todo--btn--delete"><img src="/src/assets/icon--delete-todo.svg" alt="x" title="delete"></button>
+                <button type="button" class="fc imgBtn"><img src="/src/assets/icon--view-todo.svg" alt="oo" title="edit"></button>
+                <button type="button" class="fc imgBtn"><img src="/src/assets/icon--delete-todo.svg" alt="x" title="delete"></button>
             </div>
-            <div class="todo--container">
-                <input type="checkbox" class="displayed-todo--checkbox--complete-status" id="displayed-todo--checkbox--complete-status" name="complete-status">
-                <div class="todo--name">Buy honeycrisp apples for party</div>
+            <div class="todo-container">
+                <input type="checkbox" class="fc checkbox todo-checkbox" id="todo-checkbox" name="complete-status">
+                <div class="todo-name">Buy honeycrisp apples for party</div>
                 <div class="todo--due-date">1/15/2025</div>
                 <div class="todo--priority">High</div>
-                <button type="button" class="displayed-todo--btn--edit"><img src="/src/assets/icon--view-todo.svg" alt="oo" title="edit"></button>
-                <button type="button" class="displayed-todo--btn--delete"><img src="/src/assets/icon--delete-todo.svg" alt="x" title="delete"></button>
+                <button type="button" class="fc imgBtn"><img src="/src/assets/icon--view-todo.svg" alt="oo" title="edit"></button>
+                <button type="button" class="fc imgBtn"><img src="/src/assets/icon--delete-todo.svg" alt="x" title="delete"></button>
             </div>
-            <div class="todo--container">
-                <input type="checkbox" class="displayed-todo--checkbox--complete-status" id="displayed-todo--checkbox--complete-status" name="complete-status">
-                <div class="todo--name">Drop off table napkins</div>
+            <div class="todo-container">
+                <input type="checkbox" class="fc checkbox todo-checkbox" id="todo-checkbox" name="complete-status">
+                <div class="todo-name">Drop off table napkins</div>
                 <div class="todo--due-date">1/12/2025</div>
                 <div class="todo--priority">Low</div>
-                <button type="button" class="displayed-todo--btn--edit"><img src="/src/assets/icon--view-todo.svg" alt="oo" title="edit"></button>
-                <button type="button" class="displayed-todo--btn--delete"><img src="/src/assets/icon--delete-todo.svg" alt="x" title="delete"></button>
+                <button type="button" class="fc imgBtn"><img src="/src/assets/icon--view-todo.svg" alt="oo" title="edit"></button>
+                <button type="button" class="fc imgBtn"><img src="/src/assets/icon--delete-todo.svg" alt="x" title="delete"></button>
             </div>
         </section>
-        <footer>
-            <button type="button" class="displayed-list--btn--delete-list">Delete List</button>
+        <footer class="footBtn">
+            <button type="button" class="fc btn">Delete List</button>
         </footer>
     </main>
-    <dialog id="dialog--new-list" class="dialog--new-list">
-        <div class="new-list--heading">New List</div>
-        <form class="new-list--form">
+    <dialog id="dialog--new-list" class="dialog new-list">
+        <div class="dialog-heading">New List</div>
+        <form class="form new-list--form">
             <label class="form--list-name">
                 Name
-                <input type="text" name="list-name" required>
+                <input type="text" class="foc input" name="list-name" required>
             </label>
-            <label class="form--make-default">
+            <label class="fc form--make-default">
                 Make default
-                <input type="checkbox" name="make-default">
+                <input type="checkbox" class="foc checkbox " name="make-default">
             </label>
         </form>
-        <div class="new-list--btn-container">
-            <button type="button" class="new-list--btn--cancel">Cancel</button>
-            <button type="button" class="new-list--btn--add">Add</button>
+        <div class="footBtn">
+            <button type="button" id="cancel-add-list" class="fc btn">Cancel</button>
+            <button type="button" id="add-add-list" class="fc btn">Add</button>
         </div>
     </dialog>
-    <dialog class="dialog--new-todo">
-        <div class="new-todo--heading">New Todo</div>
-        <form class="new-todo--form">
+    <dialog id="dialog--new-todo" class="dialog new-todo">
+        <div class="dialog-heading">New Todo</div>
+        <form class="form new-todo--form">
             <label class="form--todo-name">
                 Name
-                <input type="text" name="todo-name" required>
+                <input type="text" name="todo-name" class="foc input" required>
             </label>
             <label class="form--todo-desc">
                 Description
-                <textarea rows="2"></textarea>
+                <textarea rows="2" name="todo-desc" class="foc input"></textarea>
             </label>
             <label class="form--todo-due-date">
                 Due Date
-                <input type="date" name="todo-due-date">
+                <input type="date" name="todo-due-date" class="foc input">
             </label>
             <label class="form--todo-priority">
                 Priority
-                <select>
+                <select class="foc input dropBtn">
                     <option value="none"></option>
                     <option value="high">High</option>
                     <option value="medium">Medium</option>
@@ -107,27 +107,27 @@
                 </select>
             </label>
         </form>
-        <div class="new-todo--btn-container">
-            <button type="button" class="new-todo--btn--cancel">Cancel</button>
-            <button type="button" class="new-todo--btn--add">Add</button>
+        <div class="footBtn">
+            <button type="button" id="cancel-add-todo" class="fc btn new-todo--btn--cancel">Cancel</button>
+            <button type="button" id="add-add-todo" class="fc btn new-todo--btn--add">Add</button>
         </div>
     </dialog>
-    <dialog class="dialog--delete-list">
-        <div class="delete-list--heading">
+    <dialog class="dialog delete-list">
+        <div class="dialog-heading">
             Confirm the deletion of this list.
         </div>
-        <div class="delete-list--btn-container">
-            <button type="button" class="delete-list--btn--cancel">Cancel</button>
-            <button type="button" class="delete-list--btn--delete">Delete</button>
+        <div class="footBtn delete-list--btn-container">
+            <button type="button" id="cancel-delete-list" class="fc btn">Cancel</button>
+            <button type="button" id="delete-delete-list" class="fc btn">Delete</button>
         </div>
     </dialog>
-    <dialog class="dialog--delete-todo">
-        <div class="delete-todo--heading">
+    <dialog class="dialog delete-todo">
+        <div class="dialog-heading">
             Confirm the deletion of this todo.
         </div>
-        <div class="delete-todo--btn-container">
-            <button type="button" class="delete-todo--btn--cancel">Cancel</button>
-            <button type="button" class="delete-todo--btn--delete">Delete</button>
+        <div class="footBtn">
+            <button type="button" id="cancel-delete-todo" class="fc btn">Cancel</button>
+            <button type="button" id="delete-delete-todo" class="fc btn">Delete</button>
         </div>
     </dialog>
 </body>
