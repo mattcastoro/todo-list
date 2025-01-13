@@ -14,15 +14,7 @@
         <section class="lists-section">
             <button class="fc foc list-container" id="show-list-tab">
                 <div class="list-name">Groceries</div>
-                <div class="list-count">20</div>
-            </button>
-            <button class="fc foc list-container" id="show-list-tab">
-                <div class="list-name">Home Improvement</div>
-                <div class="list-count">34</div>
-            </button>
-            <button class="fc foc list-container" id="show-list-tab">
-                <div class="list-name">Wishlist</div>
-                <div class="list-count">5</div>
+                <div class="list-count">1</div>
             </button>
         </section>
     </nav>
@@ -41,28 +33,12 @@
                 <div class="todo-name">Pick up watermelons from Steve's</div>
                 <div class="todo--due-date">1/4/2025</div>
                 <div class="todo--priority">Medium</div>
-                <button type="button" class="fc imgBtn"><img src="/src/assets/icon--view-todo.svg" alt="oo" title="edit"></button>
-                <button type="button" class="fc imgBtn"><img src="/src/assets/icon--delete-todo.svg" alt="x" title="delete"></button>
-            </div>
-            <div class="todo-container">
-                <input type="checkbox" class="fc checkbox todo-checkbox" id="todo-checkbox" name="complete-status">
-                <div class="todo-name">Buy honeycrisp apples for party</div>
-                <div class="todo--due-date">1/15/2025</div>
-                <div class="todo--priority">High</div>
-                <button type="button" class="fc imgBtn"><img src="/src/assets/icon--view-todo.svg" alt="oo" title="edit"></button>
-                <button type="button" class="fc imgBtn"><img src="/src/assets/icon--delete-todo.svg" alt="x" title="delete"></button>
-            </div>
-            <div class="todo-container">
-                <input type="checkbox" class="fc checkbox todo-checkbox" id="todo-checkbox" name="complete-status">
-                <div class="todo-name">Drop off table napkins</div>
-                <div class="todo--due-date">1/12/2025</div>
-                <div class="todo--priority">Low</div>
-                <button type="button" class="fc imgBtn"><img src="/src/assets/icon--view-todo.svg" alt="oo" title="edit"></button>
-                <button type="button" class="fc imgBtn"><img src="/src/assets/icon--delete-todo.svg" alt="x" title="delete"></button>
+                <button type="button" class="fc imgBtn"><img src="/src/assets/icon--view-todo.svg" alt="oo" title="edit" id="show-edit-todo"></button>
+                <button type="button" class="fc imgBtn"><img src="/src/assets/icon--delete-todo.svg" alt="x" title="delete" id="show-delete-todo"></button>
             </div>
         </section>
         <footer class="footBtn">
-            <button type="button" class="fc btn">Delete List</button>
+            <button type="button" id="show-delete-list" class="fc btn">Delete List</button>
         </footer>
     </main>
     <dialog id="dialog--new-list" class="dialog new-list">
@@ -99,7 +75,7 @@
             </label>
             <label class="form--todo-priority">
                 Priority
-                <select class="foc input dropBtn">
+                <select id="todo-priority" class="foc input dropBtn">
                     <option value="none"></option>
                     <option value="high">High</option>
                     <option value="medium">Medium</option>
@@ -112,7 +88,37 @@
             <button type="button" id="add-add-todo" class="fc btn new-todo--btn--add">Add</button>
         </div>
     </dialog>
-    <dialog class="dialog delete-list">
+    <dialog id="dialog--edit-todo" class="dialog edit-todo">
+        <div class="dialog-heading">Edit Todo</div>
+        <form class="form edit-todo--form">
+            <label class="form--todo-name">
+                Name
+                <input type="text" name="todo-name" class="foc input" required>
+            </label>
+            <label class="form--todo-desc">
+                Description
+                <textarea rows="2" name="todo-desc" class="foc input"></textarea>
+            </label>
+            <label class="form--todo-due-date">
+                Due Date
+                <input type="date" name="todo-due-date" class="foc input">
+            </label>
+            <label class="form--todo-priority">
+                Priority
+                <select id="todo-priority" class="foc input dropBtn">
+                    <option value="none"></option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </label>
+        </form>
+        <div class="footBtn">
+            <button type="button" id="cancel-edit-todo" class="fc btn edit-todo--btn--cancel">Cancel</button>
+            <button type="button" id="update-edit-todo" class="fc btn edit-todo--btn--update">Update</button>
+        </div>
+    </dialog>
+    <dialog id="dialog--delete-list" class="dialog delete-list">
         <div class="dialog-heading">
             Confirm the deletion of this list.
         </div>
@@ -121,7 +127,7 @@
             <button type="button" id="delete-delete-list" class="fc btn">Delete</button>
         </div>
     </dialog>
-    <dialog class="dialog delete-todo">
+    <dialog id="dialog--delete-todo" class="dialog delete-todo">
         <div class="dialog-heading">
             Confirm the deletion of this todo.
         </div>
