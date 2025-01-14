@@ -46,7 +46,7 @@
         <form class="form new-list--form">
             <label class="form--list-name">
                 Name
-                <input type="text" class="foc input" name="list-name" required>
+                <input type="text" name="list-name" id="list-name" class="foc input" required>
             </label>
             <label class="fc form--make-default">
                 Make default
@@ -63,19 +63,19 @@
         <form class="form new-todo--form">
             <label class="form--todo-name">
                 Name
-                <input type="text" name="todo-name" class="foc input" required>
+                <input type="text" name="todo-name" id="todo-name" class="foc input" required>
             </label>
             <label class="form--todo-desc">
                 Description
-                <textarea rows="2" name="todo-desc" class="foc input"></textarea>
+                <textarea rows="2" name="todo-desc" id="todo-desc" class="foc input"></textarea>
             </label>
             <label class="form--todo-due-date">
                 Due Date
-                <input type="date" name="todo-due-date" class="foc input">
+                <input type="date" name="todo-due-date" id="todo-due-date" class="foc input">
             </label>
             <label class="form--todo-priority">
                 Priority
-                <select id="todo-priority" class="foc input dropBtn">
+                <select name="todo-priority" id="todo-priority" class="foc input dropBtn">
                     <option value="none"></option>
                     <option value="high">High</option>
                     <option value="medium">Medium</option>
