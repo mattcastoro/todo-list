@@ -1,4 +1,4 @@
-import { createList, createTodo } from "./utilities";
+import { createList, createTodo, generateId } from "./utilities";
 
 export function distributeEventId (id) {
     const displayAddList = document.getElementById("dialog--new-list");
@@ -8,6 +8,7 @@ export function distributeEventId (id) {
     const displayDeleteTodo = document.getElementById("dialog--delete-todo");
     switch (id) {
         case "show-add-list":
+            generateId();
             displayAddList.showModal();
             break;
         case "add-add-list":

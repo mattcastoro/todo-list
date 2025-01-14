@@ -14,5 +14,10 @@ export function createTodo() {
     let desc = document.querySelector("#todo-desc");
     let dueDate = document.querySelector("#todo-due-date");
     let priority = document.querySelector("#todo-priority");
-    console.log(name.value, desc.value, dueDate.value, priority.value);
+    let todo = new Todo(name.value, desc.value, dueDate.value, priority.value)
+    console.log(todo);
+}
+
+export function generateId() {
+    return crypto.randomUUID();
 }
