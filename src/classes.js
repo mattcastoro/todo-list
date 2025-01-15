@@ -6,6 +6,9 @@ export class List {
         this.listId = generateId();
         this.todos = [];
     }
+    get values() {
+        return this.name;
+    }
 };
 
 export class Todo {
