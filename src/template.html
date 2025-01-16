@@ -9,32 +9,36 @@
     <nav class="nav-container">
         <header class="header-container">
             <div>My Lists</div>
-            <button type="button" class="fc imgBtn"><img src="/src/assets/icon--add.svg" alt="+" title="add list" id="show-add-list"></button>
+            <button type="button" class="imgBtn"><img src="/src/assets/icon--add.svg" alt="+" title="add list" id="show-add-list" class="fc"></button>
         </header>
         <section class="lists-section">
-            <button class="fc foc list-container" id="show-list-tab">
-                <div class="list-name">Groceries</div>
-                <div class="list-count">1</div>
-            </button>
+            <button class="fc foc list-tab" id="show-list-tab_1111">Groceries</button>
+            <button class="fc foc list-tab" id="show-list-tab_2222">Wishlist</button>
+            <button class="fc foc list-tab" id="show-list-tab_3333">Home Improvement</button>
+            <button class="fc foc list-tab" id="show-list-tab_4444">Randoms</button>
         </section>
     </nav>
     <main class="main-container">
         <header class="header-container">
-            <div class="fc make-default-container">
-                <input type="checkbox" class="checkbox make-default-checkbox" id="make-displayed-list-default" name="make-default">
+            <div class="make-default-container">
+                <input type="checkbox" class="fc checkbox make-default-checkbox" id="make-displayed-list-default" name="make-default">
                 <label for="make-displayed-list-default">make default</label>
             </div>
             <div class="main--title">Groceries</div>
-            <button type="button" class="fc imgBtn show-add-todo"><img src="/src/assets/icon--add.svg" alt="+" title="add todo" id="show-add-todo"></button>
+            <button type="button" class="imgBtn show-add-todo"><img src="/src/assets/icon--add.svg" alt="+" title="add todo" id="show-add-todo" class="fc"></button>
         </header>
-        <section class="todos-container">
+        <section class="todos-section">
             <div class="todo-container">
                 <input type="checkbox" class="fc checkbox todo-checkbox" id="todo-checkbox" name="complete-status">
                 <div class="todo-name">Pick up watermelons from Steve's</div>
                 <div class="todo--due-date">1/4/2025</div>
                 <div class="todo--priority">Medium</div>
-                <button type="button" class="fc imgBtn"><img src="/src/assets/icon--view-todo.svg" alt="oo" title="edit" id="show-edit-todo"></button>
-                <button type="button" class="fc imgBtn"><img src="/src/assets/icon--delete-todo.svg" alt="x" title="delete" id="show-delete-todo"></button>
+                <button type="button" class="imgBtn">
+                    <img src="/src/assets/icon--view-todo.svg" alt="oo" title="edit" id="show-edit-todo" class="fc">
+                </button>
+                <button type="button" class="imgBtn">
+                    <img src="/src/assets/icon--delete-todo.svg" alt="x" title="delete" id="show-delete-todo" class="fc">
+                </button>
             </div>
         </section>
         <footer class="footBtn">
@@ -77,9 +81,9 @@
                 Priority
                 <select name="todo-priority" id="todo-priority" class="foc input dropBtn">
                     <option value="none"></option>
-                    <option value="high">High</option>
-                    <option value="medium">Medium</option>
-                    <option value="low">Low</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
                 </select>
             </label>
         </form>
@@ -107,9 +111,9 @@
                 Priority
                 <select id="todo-priority" class="foc input dropBtn">
                     <option value="none"></option>
-                    <option value="high">High</option>
-                    <option value="medium">Medium</option>
-                    <option value="low">Low</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
                 </select>
             </label>
         </form>

@@ -30,7 +30,7 @@ body {
     margin: 15px 0 15px 15px;
 }
 
-.list-container {
+.list-tab {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -44,7 +44,7 @@ body {
     cursor: pointer;
 }
 
-.list-container:hover {
+.list-tab:hover {
     background-color: #fffaec;
 }
 
@@ -84,7 +84,7 @@ body {
     background-color: #3d3d3d;
 }
 
-.todos-container {
+.todos-section {
     margin: 25px;
 }
 

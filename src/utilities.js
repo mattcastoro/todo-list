@@ -1,7 +1,8 @@
 import { List, Todo } from "./classes.js";
-import { displayListValidationAlert, displayTodoValidationAlert, displayList } from "./render.js";
+import { displayListValidationAlert, displayTodoValidationAlert, addList, addTodo } from "./render.js";
 
 export const lists = [];
+export const todos = [];
 let listName = document.querySelector("#list-name");
 let todoName = document.querySelector("#todo-name");
 let todoDesc = document.querySelector("#todo-desc");
@@ -12,14 +13,15 @@ export function createList() {
     validateList();
     lists.push(new List(listName.value));
     removeListInputs();
-    displayList();
+    addList();
 }
 
 export function createTodo() {
     validateTodo();
-    let todo = new Todo(todoName.value, todoDesc.value, todoDueDate.value, todoPriority.value)
-    console.log(todo);
+    todos.push(new Todo(todoName.value, todoDesc.value, todoDueDate.value, todoPriority.value));
+    console.log(todos);
     removeTodoInputs();
+    addTodo();
 }
 
 export function generateId() {
