@@ -13,6 +13,9 @@ export const displayTodoValidationAlert = document.getElementById("dialog--valid
 
 export function distributeEventId (action, guid) {
     switch (action) {
+        case "show-list-tab":
+            // displayTodos(guid);
+            break;
         case "show-add-list":
             displayAddList.showModal();
             break;
@@ -71,67 +74,64 @@ export function addList() {
         const listSection = document.querySelector(".lists-section");
         
         const list = document.createElement("button");
-        list.classList.add("fc", "foc", "list-tab");
+        list.classList.add("fc", "foc", "list-tab", "active-tab");
         list.setAttribute("id", `show-list-tab_${element.listId}`);
         list.textContent = element.name;
         listSection.appendChild(list);
     });
 }
 
-export function addTodo() {
-    let lastTodo = todos.slice(-1);
-    lastTodo.forEach((element) => {
-        const todoSection = document.querySelector(".todos-section");
-        const todo = document.createElement("div");
-        todo.classList.add("todo-container");
-        todoSection.appendChild(todo);
+export function addTodo(element) {
+    const todoSection = document.querySelector(".todos-section");
+    const todo = document.createElement("div");
+    todo.classList.add("todo-container");
+    todoSection.appendChild(todo);
 
-        const todoComplete = document.createElement("input");
-        todoComplete.setAttribute("type", "checkbox");
-        todoComplete.setAttribute("id", `todo-checkbox_${element.todoId}`);
-        todoComplete.setAttribute("name", "complete-status");
-        todoComplete.classList.add("fc", "checkbox", "todo-checkbox");
-        todo.appendChild(todoComplete);
+    const todoComplete = document.createElement("input");
+    todoComplete.setAttribute("type", "checkbox");
+    todoComplete.setAttribute("id", `todo-checkbox_${element.todoId}`);
+    todoComplete.setAttribute("name", "complete-status");
+    todoComplete.classList.add("fc", "checkbox", "todo-checkbox");
+    todo.appendChild(todoComplete);
 
-        const todoName = document.createElement("div");
-        todoName.classList.add("todo-name");
-        todoName.textContent = element.name;
-        todo.appendChild(todoName);
+    const todoName = document.createElement("div");
+    todoName.classList.add("todo-name");
+    todoName.textContent = element.name;
+    todo.appendChild(todoName);
 
-        const todoDueDate = document.createElement("div");
-        todoDueDate.classList.add("todo-due-date");
-        todoDueDate.textContent = element.dueDate;
-        todo.appendChild(todoDueDate);
+    const todoDueDate = document.createElement("div");
+    todoDueDate.classList.add("todo-due-date");
+    todoDueDate.textContent = element.dueDate;
+    todo.appendChild(todoDueDate);
 
-        const todoPriority = document.createElement("div");
-        todoPriority.classList.add("todo-priority");
-        todoPriority.textContent = element.priority;
-        todo.appendChild(todoPriority);
+    const todoPriority = document.createElement("div");
+    todoPriority.classList.add("todo-priority");
+    todoPriority.textContent = element.priority;
+    todo.appendChild(todoPriority);
 
-        const todoEditBtn = document.createElement("button");
-        todoEditBtn.setAttribute("type", "button");
-        todoEditBtn.classList.add("fc", "imgBtn");
-        todo.appendChild(todoEditBtn);
+    const todoEditBtn = document.createElement("button");
+    todoEditBtn.setAttribute("type", "button");
+    todoEditBtn.classList.add("fc", "imgBtn");
+    todo.appendChild(todoEditBtn);
 
-        const todoEditBtnImg = document.createElement("img");
-        todoEditBtnImg.src = editTodoImage;
-        todoEditBtnImg.setAttribute("alt", "oo"),
-        todoEditBtnImg.setAttribute("title", "edit");
-        todoEditBtnImg.setAttribute("id", `show-edit-todo_${element.todoId}`);
-        todoEditBtnImg.classList.add("fc");
-        todoEditBtn.appendChild(todoEditBtnImg);
+    const todoEditBtnImg = document.createElement("img");
+    todoEditBtnImg.src = editTodoImage;
+    todoEditBtnImg.setAttribute("alt", "oo"),
+    todoEditBtnImg.setAttribute("title", "edit");
+    todoEditBtnImg.setAttribute("id", `show-edit-todo_${element.todoId}`);
+    todoEditBtnImg.classList.add("fc");
+    todoEditBtn.appendChild(todoEditBtnImg);
 
-        const todoDeleteBtn = document.createElement("button");
-        todoDeleteBtn.setAttribute("type", "button");
-        todoDeleteBtn.classList.add("fc", "imgBtn");
-        todo.appendChild(todoDeleteBtn);
+    const todoDeleteBtn = document.createElement("button");
+    todoDeleteBtn.setAttribute("type", "button");
+    todoDeleteBtn.classList.add("fc", "imgBtn");
+    todo.appendChild(todoDeleteBtn);
 
-        const todoDeleteBtnImg = document.createElement("img");
-        todoDeleteBtnImg.src = deleteTodoImage;
-        todoDeleteBtnImg.setAttribute("alt", "x"),
-        todoDeleteBtnImg.setAttribute("title", "delete");
-        todoDeleteBtnImg.setAttribute("id", `show-delete-todo_${element.todoId}`);
-        todoDeleteBtnImg.classList.add("fc");
-        todoDeleteBtn.appendChild(todoDeleteBtnImg);
-    })
+    const todoDeleteBtnImg = document.createElement("img");
+    todoDeleteBtnImg.src = deleteTodoImage;
+    todoDeleteBtnImg.setAttribute("alt", "x"),
+    todoDeleteBtnImg.setAttribute("title", "delete");
+    todoDeleteBtnImg.setAttribute("id", `show-delete-todo_${element.todoId}`);
+    todoDeleteBtnImg.classList.add("fc");
+    todoDeleteBtn.appendChild(todoDeleteBtnImg);
 }

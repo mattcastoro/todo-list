@@ -12,11 +12,12 @@ export class List {
 };
 
 export class Todo {
-    constructor(name, description, dueDate, priority) {
+    constructor(name, description, dueDate, priority, listId) {
         this.name = name;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
         this.todoId = generateId();
+        this.listId = listId;
     }
 };
