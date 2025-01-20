@@ -1,4 +1,4 @@
-import { createList, createTodo, removeListInputs, removeTodoInputs, lists, todos } from "./utilities";
+import { createList, createTodo, removeListInputs, removeTodoInputs, lists, setTabs } from "./utilities";
 
 import editTodoImage from "./assets/icon--view-todo.svg";
 import deleteTodoImage from "./assets/icon--delete-todo.svg"
@@ -11,10 +11,10 @@ export const displayDeleteTodo = document.getElementById("dialog--delete-todo");
 export const displayListValidationAlert = document.getElementById("dialog--validation-list-alert");
 export const displayTodoValidationAlert = document.getElementById("dialog--validation-todo-alert");
 
-export function distributeEventId (action, guid) {
+export function distributeEventId (action, guid, event) {
     switch (action) {
-        case "show-list-tab":
-            // displayTodos(guid);
+        case "show-list":
+            setTabs(event);
             break;
         case "show-add-list":
             displayAddList.showModal();
@@ -74,8 +74,8 @@ export function addList() {
         const listSection = document.querySelector(".lists-section");
         
         const list = document.createElement("button");
-        list.classList.add("fc", "foc", "list-tab", "active-tab");
-        list.setAttribute("id", `show-list-tab_${element.listId}`);
+        list.classList.add("fc", "foc", "list-tab");
+        list.setAttribute("id", `show-list_${element.listId}`);
         list.textContent = element.name;
         listSection.appendChild(list);
     });

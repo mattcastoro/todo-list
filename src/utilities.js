@@ -29,6 +29,14 @@ export function createTodo() {
     addTodo(todo);
 }
 
+export function setTabs(event) {
+    const listTabs = document.getElementsByClassName("list-tab");
+    for (let i = 0; i < listTabs.length; i++) {
+        listTabs[i].className = listTabs[i].className.replace(" active-tab", "");
+    }
+    event.target.className += " active-tab";
+}
+
 export function generateId() {
     return crypto.randomUUID();
 }
