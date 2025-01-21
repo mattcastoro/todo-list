@@ -1,5 +1,5 @@
 import { List, Todo } from "./classes.js";
-import { displayListValidationAlert, displayTodoValidationAlert, addList, addTodo } from "./render.js";
+import { displayListValidationAlert, displayTodoValidationAlert, addList, displayTodos } from "./render.js";
 
 export const lists = [];
 let listName = document.querySelector("#list-name");
@@ -18,15 +18,17 @@ export function createList() {
 
 export function createTodo() {
     validateTodo();
-    let listGuid = document.querySelector('.active-tab').id.split("_")[1];
-    const list = lists.find(({listId}) => listId === listGuid);
-    let todo = new Todo(todoName.value, todoDesc.value, todoDueDate.value, todoPriority.value, listGuid)
+    let [list, listGuid] = findList();
+    let todo = new Todo(todoName.value, todoDesc.value, todoDueDate.value, todoPriority.value, listGuid);
     list.todos.push(todo);
-    console.log(todo);
-    console.log(list);
-    console.log(lists);
     removeTodoInputs();
-    addTodo(todo);
+    displayTodos(list.todos);
+}
+
+export function findList() {
+    let listGuid = document.querySelector('.active-tab').id.split("_")[1];
+    let list = lists.find(({listId}) => listId === listGuid);
+    return [list, listGuid];
 }
 
 export function setTabs(event) {
