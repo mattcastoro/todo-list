@@ -11,12 +11,12 @@ export const displayDeleteTodo = document.getElementById("dialog--delete-todo");
 export const displayListValidationAlert = document.getElementById("dialog--validation-list-alert");
 export const displayTodoValidationAlert = document.getElementById("dialog--validation-todo-alert");
 
-export function distributeEventId (action, guid, event) {
+export function renderEvents(action, guid, event) {
     switch (action) {
         case "show-list":
             setTabs(event);
             let [list, listGuid] = findList();
-            displayTodos(list.todos);
+            displayTodos(list.todos, list.name);
             break;
         case "show-add-list":
             displayAddList.showModal();
@@ -71,21 +71,32 @@ export function distributeEventId (action, guid, event) {
 }
 
 export function addList() {
+    const listTabs = document.getElementsByClassName("list-tab");
+    for (let i = 0; i < listTabs.length; i++) {
+        listTabs[i].classList.remove("active-tab");
+    }
     let lastList = lists.slice(-1);
     lastList.forEach((element) => {
         const listSection = document.querySelector(".lists-section");
+        const todoListTitle = document.querySelector(".main--title");
+
+        todoListTitle.textContent = element.name;
         
         const list = document.createElement("button");
-        list.classList.add("fc", "foc", "list-tab");
+        list.classList.add("fc", "foc", "list-tab", "active-tab");
         list.setAttribute("id", `show-list_${element.listId}`);
         list.textContent = element.name;
         listSection.appendChild(list);
     });
 }
 
-export function displayTodos(todoList) {
+export function displayTodos(todoList, listName) {
+    const todoListTitle = document.querySelector(".main--title");
+    todoListTitle.textContent = listName;
+
     const todoSection = document.querySelector(".todos-section");
     todoSection.textContent = "";
+    
     for (let i = 0; i < todoList.length; i++) {
         const todo = document.createElement("div");
         todo.classList.add("todo-container");
