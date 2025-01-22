@@ -1,5 +1,5 @@
 import { List, Todo } from "./classes.js";
-import { displayListValidationAlert, displayTodoValidationAlert, addList, displayTodos } from "./render.js";
+import { displayListValidationAlert, displayTodoValidationAlert, addList, displayTodos, removeTodo } from "./render.js";
 
 export const lists = [];
 let listName = document.querySelector("#list-name");
@@ -11,7 +11,6 @@ let todoPriority = document.querySelector("#todo-priority");
 export function createList() {
     validateList();
     lists.push(new List(listName.value));
-    console.log(lists);
     removeListInputs();
     addList();
 }
@@ -23,6 +22,17 @@ export function createTodo() {
     list.todos.push(todo);
     removeTodoInputs();
     displayTodos(list.todos);
+}
+
+export function updateCompleteStatus(guid) {
+    let [list, listGuid] = findList();
+    let todo = list.todos.find(({todoId}) => todoId === guid);
+    if (todo.complete == "not complete") {
+        todo.complete = "complete";
+        removeTodo(todo);
+    } else {
+        todo.complete = "not complete";
+    }
 }
 
 export function findList() {

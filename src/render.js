@@ -1,4 +1,4 @@
-import { createList, createTodo, removeListInputs, removeTodoInputs, lists, setTabs, findList } from "./utilities";
+import { createList, createTodo, removeListInputs, removeTodoInputs, lists, setTabs, findList, updateCompleteStatus } from "./utilities";
 
 import editTodoImage from "./assets/icon--view-todo.svg";
 import deleteTodoImage from "./assets/icon--delete-todo.svg"
@@ -8,6 +8,7 @@ export const displayDeleteList = document.getElementById("dialog--delete-list");
 export const displayAddTodo = document.getElementById("dialog--new-todo");
 export const displayEditTodo = document.getElementById("dialog--edit-todo");
 export const displayDeleteTodo = document.getElementById("dialog--delete-todo");
+export const displayUncompleteTodo = document.getElementById("dialog--uncomplete-todo");
 export const displayListValidationAlert = document.getElementById("dialog--validation-list-alert");
 export const displayTodoValidationAlert = document.getElementById("dialog--validation-todo-alert");
 
@@ -46,6 +47,9 @@ export function renderEvents(action, guid, event) {
             removeTodoInputs();
             displayAddTodo.close();
             break;
+        case "todo-checkbox":
+            updateCompleteStatus(guid);
+            break;
         case "show-edit-todo":
             displayEditTodo.showModal();
             break;
@@ -78,15 +82,12 @@ export function addList() {
     let lastList = lists.slice(-1);
     lastList.forEach((element) => {
         const listSection = document.querySelector(".lists-section");
-        const todoListTitle = document.querySelector(".main--title");
-
-        todoListTitle.textContent = element.name;
-        
         const list = document.createElement("button");
         list.classList.add("fc", "foc", "list-tab", "active-tab");
         list.setAttribute("id", `show-list_${element.listId}`);
         list.textContent = element.name;
         listSection.appendChild(list);
+        displayTodos(element.todos, element.name);
     });
 }
 
@@ -99,7 +100,7 @@ export function displayTodos(todoList, listName) {
     
     for (let i = 0; i < todoList.length; i++) {
         const todo = document.createElement("div");
-        todo.classList.add("todo-container");
+        todo.classList.add(`todo-container_${todoList[i].todoId}`);
         todoSection.appendChild(todo);
 
         const todoComplete = document.createElement("input");
@@ -126,6 +127,7 @@ export function displayTodos(todoList, listName) {
 
         const todoEditBtn = document.createElement("button");
         todoEditBtn.setAttribute("type", "button");
+        todoEditBtn.setAttribute("id", `edit-btn_${todoList[i].todoId}`);
         todoEditBtn.classList.add("fc", "imgBtn");
         todo.appendChild(todoEditBtn);
 
@@ -139,6 +141,7 @@ export function displayTodos(todoList, listName) {
 
         const todoDeleteBtn = document.createElement("button");
         todoDeleteBtn.setAttribute("type", "button");
+        todoDeleteBtn.setAttribute("id", `delete-btn_${todoList[i].todoId}`);
         todoDeleteBtn.classList.add("fc", "imgBtn");
         todo.appendChild(todoDeleteBtn);
 
@@ -151,3 +154,24 @@ export function displayTodos(todoList, listName) {
         todoDeleteBtn.appendChild(todoDeleteBtnImg);
     }
 }
+
+export function removeTodo(todo) {
+    const id = todo.todoId;
+    const todoSection = document.querySelector(".todos-section");
+
+    const todoContainer = document.querySelector(`.todo-container_${id}`);
+    const todoCheckbox = document.querySelector(`#todo-checkbox_${id}`);
+    const editBtnContainer = document.querySelector(`#edit-btn_${id}`);
+    const editBtn = document.querySelector(`#show-edit-todo_${id}`);
+    const deleteBtnContainer = document.querySelector(`#delete-btn_${id}`);
+    const deleteBtn = document.querySelector(`#show-delete-todo_${id}`);
+
+    todoSection.removeChild(todoContainer);
+
+    todoContainer.classList.add("complete");
+    todoCheckbox.classList.add("complete");
+    todoSection.appendChild(todoContainer);
+    editBtnContainer.removeChild(editBtn);
+    deleteBtnContainer.removeChild(deleteBtn);
+}
+
