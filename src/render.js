@@ -153,6 +153,11 @@ export function displayTodos(todoList, listName) {
         todoDeleteBtnImg.classList.add("fc");
         todoDeleteBtn.appendChild(todoDeleteBtnImg);
     }
+    for (let j = 0; j < todoList.length; j++) {
+        if (todoList[j].complete == "complete") {
+            removeTodo(todoList[j]);
+        }
+    }
 }
 
 export function removeTodo(todo) {
