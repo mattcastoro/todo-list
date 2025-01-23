@@ -92,6 +92,8 @@ export function addList() {
 }
 
 export function displayTodos(todoList, listName) {
+    console.log(todoList);
+    console.log(listName);
     const todoListTitle = document.querySelector(".main--title");
     todoListTitle.textContent = listName;
 

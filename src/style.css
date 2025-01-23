@@ -118,6 +118,10 @@ body {
     background-color: lightgray;
 }
 
+.todo-checkbox.complete:hover {
+    background-color: #3d3d3d;
+}
+
 .todo-name {
     justify-self: start;
 }

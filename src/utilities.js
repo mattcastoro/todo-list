@@ -21,7 +21,7 @@ export function createTodo() {
     let todo = new Todo(todoName.value, todoDesc.value, todoDueDate.value, todoPriority.value, listGuid);
     list.todos.push(todo);
     removeTodoInputs();
-    displayTodos(list.todos);
+    displayTodos(list.todos, list.name);
 }
 
 export function updateCompleteStatus(guid) {
@@ -30,9 +30,9 @@ export function updateCompleteStatus(guid) {
     if (todo.complete == "not complete") {
         todo.complete = "complete";
         removeTodo(todo);
-    } else {
+    } else if (todo.complete == "complete") {
         todo.complete = "not complete";
-        // displayTodos(list, list.name); **test after updating completed todo placement on toggle**
+        displayTodos(list.todos, list.name);
     }
 }
 
