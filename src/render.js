@@ -1,4 +1,4 @@
-import { createList, createTodo, removeListInputs, removeTodoInputs, lists, setTabs, retrieveList, updateCompleteStatus, setId, editTodo, showTodoValues } from "./utilities";
+import { createList, createTodo, removeListInputs, removeTodoInputs, lists, setTabs, retrieveList, updateCompleteStatus, setId, editTodo, showTodoValues, updateDeleteButton, deleteList } from "./utilities";
 
 import editTodoImage from "./assets/icon--view-todo.svg";
 import deleteTodoImage from "./assets/icon--delete-todo.svg"
@@ -15,13 +15,6 @@ export const displayTodoValidationAlert = document.getElementById("dialog--valid
 export function renderEvents(action, guid, event) {
     switch (action) {
 
-        //SHOW LIST
-        case "show-list":
-            setTabs(event);
-            let [list, listGuid] = retrieveList();
-            displayTodos(list.todos, list.name);
-            break;
-
         //ADD LIST
         case "show-add-list":
             displayAddList.showModal();
@@ -35,14 +28,24 @@ export function renderEvents(action, guid, event) {
             displayAddList.close();
             break;
 
+        //SHOW LIST
+        case "show-list":
+            setTabs(event, guid);
+            let [list, listGuid] = retrieveList();
+            displayTodos(list.todos, list.name);
+            break;
+
         //DELETE LIST
         case "show-delete-list":
+            setId(action, guid);
             displayDeleteList.showModal();
             break;
         case "cancel-delete-list":
             displayDeleteList.close();
             break;
         case "delete-delete-list":
+            deleteList(guid);
+            displayDeleteList.close();
             break;
 
         //ADD TODO
@@ -112,6 +115,7 @@ export function addList() {
         list.setAttribute("id", `show-list_${element.listId}`);
         list.textContent = element.name;
         listSection.appendChild(list);
+        updateDeleteButton(element.listId);
         displayTodos(element.todos, element.name);
     });
 }

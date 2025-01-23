@@ -156,10 +156,15 @@ img {
     cursor: pointer;
 }
 
-.btn:hover {
+.btn:hover:not([disabled]) {
     color: #3d3d3d;
     background-color: #fffaec;
     border: 2px solid #3d3d3d;
+}
+
+.btn:disabled {
+    background-color: lightgray;
+    border: 2px solid lightgray;
 }
 
 .dialog[open] {

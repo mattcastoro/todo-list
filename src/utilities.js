@@ -49,13 +49,22 @@ export function editTodo(todoGuid) {
     displayTodos(list.todos, list.name);
 }
 
+export function deleteList(listGuid) {
+    lists.splice(lists.findIndex(index => index.listId === listGuid), 1);
+    console.log(lists);
+
+    //remove list-container from nav and displayed todos associated with list
+    //display default list upon dialog closing
+} 
+
 export function setId(action, guid) {
     if (action == "show-edit-todo") {
         const element = document.querySelector('[id ^= "update-edit-todo"]');
         element.id = `update-edit-todo_${guid}`;
-    } else if (action == "show-delete-todo") {
-
     } else if (action == "show-delete-list") {
+        const element = document.querySelector('[id ^= "delete-delete-list"]');
+        element.id = `delete-delete-list_${guid}`;
+    } else if (action == "show-delete-todo") {
 
     }
 }
@@ -83,12 +92,19 @@ function retrieveTodo(list, todoGuid) {
     return todo;
 }
 
-export function setTabs(event) {
+export function setTabs(event, guid) {
     const listTabs = document.getElementsByClassName("list-tab");
     for (let i = 0; i < listTabs.length; i++) {
         listTabs[i].className = listTabs[i].className.replace(" active-tab", "");
     }
     event.target.className += " active-tab";
+    updateDeleteButton(guid);
+}
+
+export function updateDeleteButton(listGuid) {
+    const deleteBtn = document.querySelector(".delete-list-button");
+    deleteBtn.disabled = false;
+    deleteBtn.id = `show-delete-list_${listGuid}`;
 }
 
 export function generateId() {
