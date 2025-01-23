@@ -1,4 +1,4 @@
-import { createList, createTodo, removeListInputs, removeTodoInputs, lists, setTabs, findList, updateCompleteStatus } from "./utilities";
+import { createList, createTodo, removeListInputs, removeTodoInputs, lists, setTabs, retrieveList, updateCompleteStatus, setId, editTodo, showTodoValues } from "./utilities";
 
 import editTodoImage from "./assets/icon--view-todo.svg";
 import deleteTodoImage from "./assets/icon--delete-todo.svg"
@@ -14,55 +14,80 @@ export const displayTodoValidationAlert = document.getElementById("dialog--valid
 
 export function renderEvents(action, guid, event) {
     switch (action) {
+
+        //SHOW LIST
         case "show-list":
             setTabs(event);
-            let [list, listGuid] = findList();
+            let [list, listGuid] = retrieveList();
             displayTodos(list.todos, list.name);
             break;
+
+        //ADD LIST
         case "show-add-list":
             displayAddList.showModal();
-            break;
-        case "add-add-list":
-            createList();
-            displayAddList.close();
             break;
         case "cancel-add-list":
             removeListInputs();
             displayAddList.close();
             break;
+        case "add-add-list":
+            createList();
+            displayAddList.close();
+            break;
+
+        //DELETE LIST
         case "show-delete-list":
             displayDeleteList.showModal();
             break;
         case "cancel-delete-list":
             displayDeleteList.close();
             break;
+        case "delete-delete-list":
+            break;
+
+        //ADD TODO
         case "show-add-todo":
             displayAddTodo.showModal();
-            break;
-        case "add-add-todo":
-            createTodo();
-            displayAddTodo.close();
             break;
         case "cancel-add-todo":
             removeTodoInputs();
             displayAddTodo.close();
             break;
-        case "todo-checkbox":
-            updateCompleteStatus(guid);
+        case "add-add-todo":
+            createTodo();
+            displayAddTodo.close();
             break;
+
+        //EDIT TODO
         case "show-edit-todo":
+            setId(action, guid);
             displayEditTodo.showModal();
+            showTodoValues(guid);
             break;
         case "cancel-edit-todo":
             removeTodoInputs();
             displayEditTodo.close();
             break;
+        case "update-edit-todo":
+            editTodo(guid);
+            removeTodoInputs();
+            displayEditTodo.close();
+            break;
+
+        //DELETE TODO
         case "show-delete-todo":
             displayDeleteTodo.showModal();
             break;
         case "cancel-delete-todo":
             displayDeleteTodo.close();
             break;
+
+        //COMPLETE CHECKBOX
+        case "todo-checkbox":
+            updateCompleteStatus(guid);
+            break;
+
+        //VALIDATIONS
         case "alert-list-ok":
             displayListValidationAlert.close();
             displayAddList.showModal();
@@ -92,8 +117,6 @@ export function addList() {
 }
 
 export function displayTodos(todoList, listName) {
-    console.log(todoList);
-    console.log(listName);
     const todoListTitle = document.querySelector(".main--title");
     todoListTitle.textContent = listName;
 
