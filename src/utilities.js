@@ -1,5 +1,5 @@
 import { List, Todo } from "./classes.js";
-import { displayListValidationAlert, displayTodoValidationAlert, addList, displayTodos, removeTodo } from "./render.js";
+import { displayListValidationAlert, displayTodoValidationAlert, addList, displayTodos, shiftCompletedTodo, removeList } from "./render.js";
 
 export const lists = [];
 let listName = document.querySelector("#list-name");
@@ -52,6 +52,7 @@ export function editTodo(todoGuid) {
 export function deleteList(listGuid) {
     lists.splice(lists.findIndex(index => index.listId === listGuid), 1);
     console.log(lists);
+    removeList(listGuid);
 
     //remove list-container from nav and displayed todos associated with list
     //display default list upon dialog closing
@@ -74,7 +75,7 @@ export function updateCompleteStatus(guid) {
     let todo = list.todos.find(({todoId}) => todoId === guid);
     if (todo.complete == "not complete") {
         todo.complete = "complete";
-        removeTodo(todo);
+        shiftCompletedTodo(todo);
     } else if (todo.complete == "complete") {
         todo.complete = "not complete";
         displayTodos(list.todos, list.name);

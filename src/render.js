@@ -184,12 +184,21 @@ export function displayTodos(todoList, listName) {
     }
     for (let j = 0; j < todoList.length; j++) {
         if (todoList[j].complete == "complete") {
-            removeTodo(todoList[j]);
+            shiftCompletedTodo(todoList[j]);
         }
     }
 }
 
-export function removeTodo(todo) {
+export function removeList(guid) {
+    const listsSection = document.querySelector(".lists-section");
+    const listContainer = document.querySelector(`#show-list_${guid}`);
+    listsSection.removeChild(listContainer);
+
+    const mainTitle = document.querySelector(".main--title");
+    mainTitle.textContent = "";
+}
+
+export function shiftCompletedTodo(todo) {
     const id = todo.todoId;
     const todoSection = document.querySelector(".todos-section");
 
