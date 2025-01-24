@@ -1,5 +1,5 @@
 import { List, Todo } from "./classes.js";
-import { displayListValidationAlert, displayTodoValidationAlert, addList, displayTodos, shiftCompletedTodo, removeList } from "./render.js";
+import { displayListValidationAlert, displayTodoValidationAlert, addList, displayTodos, shiftCompletedTodo, removeList, removeTodo } from "./render.js";
 
 export const lists = [];
 let listName = document.querySelector("#list-name");
@@ -39,7 +39,7 @@ export function showTodoValues(todoGuid) {
 }
 
 export function editTodo(todoGuid) {
-    // validateTodo(); **interim for testing**
+    // validateTodo(); /** REINSTATE POST TESTING */
     let [list, listGuid] = retrieveList();
     let todo = retrieveTodo(list, todoGuid);
     todo.name = editTodoName.value;
@@ -51,12 +51,15 @@ export function editTodo(todoGuid) {
 
 export function deleteList(listGuid) {
     lists.splice(lists.findIndex(index => index.listId === listGuid), 1);
-    console.log(lists);
     removeList(listGuid);
-
-    //remove list-container from nav and displayed todos associated with list
-    //display default list upon dialog closing
+    /** DISPLAY DEFUALT LIST UPON DELETION */
 } 
+
+export function deleteTodo(todoGuid) {
+    let [list, listGuid] = retrieveList();
+    list.todos.splice(list.todos.findIndex(index => index.todoId === todoGuid), 1);
+    removeTodo(todoGuid);
+}
 
 export function setId(action, guid) {
     if (action == "show-edit-todo") {
@@ -66,7 +69,8 @@ export function setId(action, guid) {
         const element = document.querySelector('[id ^= "delete-delete-list"]');
         element.id = `delete-delete-list_${guid}`;
     } else if (action == "show-delete-todo") {
-
+        const element = document.querySelector(`[id ^= "delete-delete-todo"]`);
+        element.id = `delete-delete-todo_${guid}`;
     }
 }
 

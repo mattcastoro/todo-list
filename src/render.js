@@ -1,4 +1,4 @@
-import { createList, createTodo, removeListInputs, removeTodoInputs, lists, setTabs, retrieveList, updateCompleteStatus, setId, editTodo, showTodoValues, updateDeleteButton, deleteList } from "./utilities";
+import { createList, createTodo, removeListInputs, removeTodoInputs, lists, setTabs, retrieveList, updateCompleteStatus, setId, editTodo, showTodoValues, updateDeleteButton, deleteList, deleteTodo } from "./utilities";
 
 import editTodoImage from "./assets/icon--view-todo.svg";
 import deleteTodoImage from "./assets/icon--delete-todo.svg"
@@ -79,9 +79,14 @@ export function renderEvents(action, guid, event) {
 
         //DELETE TODO
         case "show-delete-todo":
+            setId(action, guid);
             displayDeleteTodo.showModal();
             break;
         case "cancel-delete-todo":
+            displayDeleteTodo.close();
+            break;
+        case "delete-delete-todo":
+            deleteTodo(guid);
             displayDeleteTodo.close();
             break;
 
@@ -189,13 +194,22 @@ export function displayTodos(todoList, listName) {
     }
 }
 
-export function removeList(guid) {
+export function removeList(listGuid) {
     const listsSection = document.querySelector(".lists-section");
-    const listContainer = document.querySelector(`#show-list_${guid}`);
+    const listContainer = document.querySelector(`#show-list_${listGuid}`);
     listsSection.removeChild(listContainer);
+
+    const todoSection = document.querySelector(".todos-section");
+    todoSection.textContent = "";
 
     const mainTitle = document.querySelector(".main--title");
     mainTitle.textContent = "";
+}
+
+export function removeTodo(todoGuid) {
+    const todoSection = document.querySelector(".todos-section");
+    const todoContainer = document.querySelector(`.todo-container_${todoGuid}`);
+    todoSection.removeChild(todoContainer);
 }
 
 export function shiftCompletedTodo(todo) {
