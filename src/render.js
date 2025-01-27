@@ -37,8 +37,11 @@ export function renderEvents(action, guid, event) {
 
         //DELETE LIST
         case "show-delete-list":
-            setId(action, guid);
-            displayDeleteList.showModal();
+            if (lists.length === 0) {
+            } else {
+                setId(action, guid);
+                displayDeleteList.showModal();
+            }
             break;
         case "cancel-delete-list":
             displayDeleteList.close();
@@ -50,7 +53,10 @@ export function renderEvents(action, guid, event) {
 
         //ADD TODO
         case "show-add-todo":
-            displayAddTodo.showModal();
+            if (lists.length === 0) {
+            } else {
+                displayAddTodo.showModal();
+            }
             break;
         case "cancel-add-todo":
             removeTodoInputs();
@@ -92,9 +98,12 @@ export function renderEvents(action, guid, event) {
 
         //MAKE DISPLAYED LIST DEFAULT
         case "make-displayed-list-default":
-            setDefaultList(guid);
-            let [list1, listGuid1] = retrieveList();
-            displayTodos(list1.todos, list1.name, list1.defaultList);
+            if (lists.length === 0) {
+            } else {
+                setDefaultList(guid);
+                let [list1, listGuid1] = retrieveList();
+                displayTodos(list1.todos, list1.name, list1.defaultList);
+            }
             break;
 
         //COMPLETE CHECKBOX

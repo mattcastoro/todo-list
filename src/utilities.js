@@ -114,7 +114,6 @@ export function setTabs(event, guid) {
 
 export function updateDeleteButton(listGuid) {
     const deleteBtn = document.querySelector(".delete-list-button");
-    deleteBtn.disabled = false;
     deleteBtn.id = `show-delete-list_${listGuid}`;
 }
 
