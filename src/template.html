@@ -17,7 +17,7 @@
         <header class="header-container">
             <div class="make-default-container">
                 <input type="checkbox" class="fc checkbox make-default-checkbox" id="make-displayed-list-default" name="make-default">
-                <label for="make-displayed-list-default">make default</label>
+                <label for="make-displayed-list-default" id="default-list-title">make default</label>
             </div>
             <div class="main--title"></div>
             <button type="button" class="imgBtn show-add-todo"><img src="/src/assets/icon--add.svg" alt="+" title="add todo" id="show-add-todo" class="fc"></button>
@@ -36,7 +36,7 @@
             </label>
             <label class="fc form--make-default">
                 Make default
-                <input type="checkbox" class="foc checkbox " name="make-default">
+                <input type="checkbox" name="make-default" id="new-make-default" class="foc checkbox" >
             </label>
         </form>
         <div class="footBtn">
@@ -136,6 +136,15 @@
         </div>
         <div class="footBtn">
             <button type="button" id="alert-todo-ok" class="fc btn">Ok</button>
+        </div>
+    </dialog>
+    <dialog id="dialog--delete-todo" class="dialog delete-todo">
+        <div class="dialog-heading">
+            Confirm the deletion of this todo.
+        </div>
+        <div class="footBtn">
+            <button type="button" id="cancel-delete-todo" class="fc btn">Cancel</button>
+            <button type="button" id="delete-delete-todo" class="fc btn">Delete</button>
         </div>
     </dialog>
 </body>

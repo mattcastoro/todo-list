@@ -1,4 +1,4 @@
-import { createList, createTodo, removeListInputs, removeTodoInputs, lists, setTabs, retrieveList, updateCompleteStatus, setId, editTodo, showTodoValues, updateDeleteButton, deleteList, deleteTodo } from "./utilities";
+import { createList, createTodo, removeListInputs, removeTodoInputs, lists, setTabs, retrieveList, updateCompleteStatus, setId, editTodo, showTodoValues, updateDeleteButton, deleteList, deleteTodo, updateDefaultCheckbox, setDefaultList } from "./utilities";
 
 import editTodoImage from "./assets/icon--view-todo.svg";
 import deleteTodoImage from "./assets/icon--delete-todo.svg"
@@ -32,7 +32,7 @@ export function renderEvents(action, guid, event) {
         case "show-list":
             setTabs(event, guid);
             let [list, listGuid] = retrieveList();
-            displayTodos(list.todos, list.name);
+            displayTodos(list.todos, list.name, list.defaultList);
             break;
 
         //DELETE LIST
@@ -90,6 +90,13 @@ export function renderEvents(action, guid, event) {
             displayDeleteTodo.close();
             break;
 
+        //MAKE DISPLAYED LIST DEFAULT
+        case "make-displayed-list-default":
+            setDefaultList(guid);
+            let [list1, listGuid1] = retrieveList();
+            displayTodos(list1.todos, list1.name, list1.defaultList);
+            break;
+
         //COMPLETE CHECKBOX
         case "todo-checkbox":
             updateCompleteStatus(guid);
@@ -121,16 +128,29 @@ export function addList() {
         list.textContent = element.name;
         listSection.appendChild(list);
         updateDeleteButton(element.listId);
-        displayTodos(element.todos, element.name);
+        updateDefaultCheckbox(element.listId);
+        displayTodos(element.todos, element.name, element.defaultList);
     });
 }
 
-export function displayTodos(todoList, listName) {
+export function displayTodos(todoList, listName, listDefault) {
     const todoListTitle = document.querySelector(".main--title");
     todoListTitle.textContent = listName;
 
     const todoSection = document.querySelector(".todos-section");
     todoSection.textContent = "";
+
+    const defaultListCb = document.querySelector('[id ^= "make-displayed-list-default"]');
+    const defaultListTitle = document.querySelector("#default-list-title");
+    if (listDefault === true) {
+        defaultListCb.checked = true;
+        defaultListCb.disabled = true;
+        defaultListTitle.textContent = "default list";
+    } else {
+        defaultListCb.checked = false;
+        defaultListCb.disabled = false;
+        defaultListTitle.textContent = "make default";
+    }
     
     for (let i = 0; i < todoList.length; i++) {
         const todo = document.createElement("div");
@@ -230,5 +250,16 @@ export function shiftCompletedTodo(todo) {
     todoSection.appendChild(todoContainer);
     editBtnContainer.removeChild(editBtn);
     deleteBtnContainer.removeChild(deleteBtn);
+}
+
+export function renderDefaultList(newListGuid, oldListGuid) {
+    if (oldListGuid !== undefined) {
+        let oldDefaultListBtn = document.querySelector(`#show-list_${oldListGuid}`);
+        oldDefaultListBtn.classList.remove("default-list");
+    }
+    let listsSection = document.querySelector(".lists-section");
+    let newDefaultlistBtn = document.querySelector(`#show-list_${newListGuid}`);
+    newDefaultlistBtn.classList.add("default-list");
+    listsSection.insertBefore(newDefaultlistBtn, listsSection.firstChild);
 }
 

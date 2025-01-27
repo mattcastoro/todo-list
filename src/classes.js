@@ -1,10 +1,11 @@
 import { generateId } from "./utilities";
 
 export class List {
-    constructor(name) {
+    constructor(name, defaultList) {
         this.name = name;
+        this.defaultList = defaultList;
         this.listId = generateId();
-        this.todos = [];
+        this.todos = [];;
     }
     get values() {
         return this.name;
@@ -12,7 +13,7 @@ export class List {
 };
 
 export class Todo {
-    constructor(name, description, dueDate, priority, listId, complete) {
+    constructor(name, description, dueDate, priority, listId) {
         this.name = name;
         this.description = description;
         this.dueDate = dueDate;

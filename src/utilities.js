@@ -1,8 +1,10 @@
 import { List, Todo } from "./classes.js";
-import { displayListValidationAlert, displayTodoValidationAlert, addList, displayTodos, shiftCompletedTodo, removeList, removeTodo } from "./render.js";
+import { displayListValidationAlert, displayTodoValidationAlert, addList, displayTodos, shiftCompletedTodo, removeList, removeTodo, renderDefaultList } from "./render.js";
 
 export const lists = [];
 let listName = document.querySelector("#list-name");
+let defaultList = document.querySelector("#new-make-default");
+
 let todoName = document.querySelector("#todo-name");
 let todoDesc = document.querySelector("#todo-desc");
 let todoDueDate = document.querySelector("#todo-due-date");
@@ -14,19 +16,22 @@ let editTodoDueDate = document.querySelector("#edit-todo-due-date");
 let editTodoPriority = document.querySelector("#edit-todo-priority");
 
 export function createList() {
-    validateList();
-    lists.push(new List(listName.value));
-    removeListInputs();
+    validateNewList();
+    lists.push(new List(listName.value, defaultList.checked));
     addList();
+    if (defaultList.checked === true) {
+        setDefaultList(lists[lists.length - 1].listId);
+    }
+    removeListInputs();
 }
 
 export function createTodo() {
-    // validateTodo(); **interim for testing**
+    // validateNewTodo(); /** REINSTATE POST TESTING */
     let [list, listGuid] = retrieveList();
     let todo = new Todo(todoName.value, todoDesc.value, todoDueDate.value, todoPriority.value, listGuid);
     list.todos.push(todo);
     removeTodoInputs();
-    displayTodos(list.todos, list.name);
+    displayTodos(list.todos, list.name, list.defaultList);
 }
 
 export function showTodoValues(todoGuid) {
@@ -39,14 +44,14 @@ export function showTodoValues(todoGuid) {
 }
 
 export function editTodo(todoGuid) {
-    // validateTodo(); /** REINSTATE POST TESTING */
+    // validateNewTodo(); /** REINSTATE POST TESTING */
     let [list, listGuid] = retrieveList();
     let todo = retrieveTodo(list, todoGuid);
     todo.name = editTodoName.value;
     todo.description = editTodoDesc.value;
     todo.dueDate = editTodoDueDate.value;
     todo.priority = editTodoPriority.value;
-    displayTodos(list.todos, list.name);
+    displayTodos(list.todos, list.name, list.defaultList);
 }
 
 export function deleteList(listGuid) {
@@ -82,7 +87,7 @@ export function updateCompleteStatus(guid) {
         shiftCompletedTodo(todo);
     } else if (todo.complete == "complete") {
         todo.complete = "not complete";
-        displayTodos(list.todos, list.name);
+        displayTodos(list.todos, list.name, list.defaultList);
     }
 }
 
@@ -104,6 +109,7 @@ export function setTabs(event, guid) {
     }
     event.target.className += " active-tab";
     updateDeleteButton(guid);
+    updateDefaultCheckbox(guid);
 }
 
 export function updateDeleteButton(listGuid) {
@@ -112,12 +118,33 @@ export function updateDeleteButton(listGuid) {
     deleteBtn.id = `show-delete-list_${listGuid}`;
 }
 
+export function updateDefaultCheckbox (listGuid) {
+    const defaultCb = document.querySelector(".make-default-checkbox");
+    defaultCb.id = `make-displayed-list-default_${listGuid}`;
+}
+
+export function setDefaultList(listGuid) {
+    let currentDefaultList = lists.find(({defaultList}) => defaultList === true);
+    if (currentDefaultList !== undefined) {
+        currentDefaultList.defaultList = false;
+        let newDefaultList = lists.find(({listId}) => listId === listGuid);
+        newDefaultList.defaultList = true;
+        renderDefaultList(listGuid, currentDefaultList.listId);
+    } else {
+        let newDefaultList = lists.find(({listId}) => listId === listGuid);
+        newDefaultList.defaultList = true;
+        renderDefaultList(listGuid, undefined);
+    }
+    
+}
+
 export function generateId() {
     return crypto.randomUUID();
 }
 
 export function removeListInputs() {
     listName.value = "";
+    defaultList.checked = false;
 }
 
 export function removeTodoInputs() {
@@ -132,13 +159,13 @@ export function removeTodoInputs() {
     editTodoPriority.value = "";
 }
 
-function validateList() {
+function validateNewList() {
     if (listName.value == "") {
         displayListValidationAlert.showModal();
     }
 }
 
-function validateTodo() {
+function validateNewTodo() {
     if (todoName.value == ""
         || todoDesc.value == ""
         || todoDueDate.value == ""
