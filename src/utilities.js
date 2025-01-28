@@ -57,7 +57,17 @@ export function editTodo(todoGuid) {
 export function deleteList(listGuid) {
     lists.splice(lists.findIndex(index => index.listId === listGuid), 1);
     removeList(listGuid);
-    /** DISPLAY DEFUALT LIST UPON DELETION */
+    let defaultList = getDefaultList();
+    if (defaultList !== undefined) {
+        setTabs("pass", defaultList.listId);
+        displayTodos(defaultList, defaultList.name, defaultList.defaultList);
+    } else {
+        if (lists.length !== 0) {
+            let lastList = lists[lists.length - 1];
+            setTabs("pass", lastList.listId);
+            displayTodos(lastList, lastList.name, lastList.defaultList);
+        }
+    }
 } 
 
 export function deleteTodo(todoGuid) {
@@ -107,7 +117,12 @@ export function setTabs(event, guid) {
     for (let i = 0; i < listTabs.length; i++) {
         listTabs[i].className = listTabs[i].className.replace(" active-tab", "");
     }
-    event.target.className += " active-tab";
+    if (event === "pass") {
+        let listTab = document.querySelector(`#show-list_${guid}`);
+        listTab.className += " active-tab";
+    } else {
+        event.target.className += " active-tab";
+    }
     updateDeleteButton(guid);
     updateDefaultCheckbox(guid);
 }
@@ -135,6 +150,11 @@ export function setDefaultList(listGuid) {
         renderDefaultList(listGuid, undefined);
     }
     
+}
+
+export function getDefaultList() {
+    let defaultList = lists.find(({defaultList}) => defaultList === true);
+    return defaultList;
 }
 
 export function generateId() {
