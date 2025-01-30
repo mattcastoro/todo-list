@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Lists</title>
+<link rel="icon" href="favicon--list.svg"><script defer src="main.js"></script></head>
+<body>
+    <nav class="nav-container">
+        <header class="header-container">
+            <div>My Lists</div>
+            <button type="button" class="imgBtn"><img src="68b40af2900ad5601e1b.svg" alt="+" title="add list" id="show-add-list" class="fc"></button>
+        </header>
+        <section class="lists-section"></section>
+    </nav>
+    <main class="main-container">
+        <header class="header-container">
+            <div class="make-default-container">
+                <input type="checkbox" class="fc checkbox make-default-checkbox" id="make-displayed-list-default" name="make-default">
+                <label for="make-displayed-list-default" id="default-list-title">make default</label>
+            </div>
+            <div class="main--title"></div>
+            <button type="button" class="imgBtn show-add-todo"><img src="68b40af2900ad5601e1b.svg" alt="+" title="add todo" id="show-add-todo" class="fc"></button>
+        </header>
+        <section class="todos-section"></section>
+        <footer class="footBtn">
+            <button type="button" id="show-delete-list" class="fc btn delete-list-button">Delete List</button>
+        </footer>
+    </main>
+    <dialog id="dialog--new-list" class="dialog new-list">
+        <div class="dialog-heading">New List</div>
+        <form class="form new-list--form">
+            <label class="form--list-name">
+                Name*
+                <input type="text" name="list-name" id="list-name" class="foc input" required>
+            </label>
+            <label class="fc form--make-default">
+                Make default
+                <input type="checkbox" name="make-default" id="new-make-default" class="foc checkbox" >
+            </label>
+        </form>
+        <div class="footBtn">
+            <button type="button" id="cancel-add-list" class="fc btn">Cancel</button>
+            <button type="button" id="add-add-list" class="fc btn">Add</button>
+        </div>
+    </dialog>
+    <dialog id="dialog--new-todo" class="dialog new-todo">
+        <div class="dialog-heading">New Todo</div>
+        <form class="form new-todo--form">
+            <label class="form--todo-name">
+                Name*
+                <input type="text" name="todo-name" id="todo-name" class="foc input" required>
+            </label>
+            <label class="form--todo-desc">
+                Description
+                <textarea rows="2" name="todo-desc" id="todo-desc" class="foc input"></textarea>
+            </label>
+            <label class="form--todo-due-date">
+                Due Date
+                <input type="date" name="todo-due-date" id="todo-due-date" class="foc input">
+            </label>
+            <label class="form--todo-priority">
+                Priority
+                <select name="todo-priority" id="todo-priority" class="foc input dropBtn">
+                    <option value="none"></option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+            </label>
+        </form>
+        <div class="footBtn">
+            <button type="button" id="cancel-add-todo" class="fc btn new-todo--btn--cancel">Cancel</button>
+            <button type="button" id="add-add-todo" class="fc btn new-todo--btn--add">Add</button>
+        </div>
+    </dialog>
+    <dialog id="dialog--edit-todo" class="dialog edit-todo">
+        <div class="dialog-heading">Edit Todo</div>
+        <form class="form edit-todo--form">
+            <label class="form--todo-name">
+                Name
+                <input type="text" name="edit-todo-name" id="edit-todo-name" class="foc input" required>
+            </label>
+            <label class="form--todo-desc">
+                Description
+                <textarea rows="2" name="edit-todo-desc" id="edit-todo-desc" class="foc input"></textarea>
+            </label>
+            <label class="form--todo-due-date">
+                Due Date
+                <input type="date" name="edit-todo-due-date" id="edit-todo-due-date" class="foc input">
+            </label>
+            <label class="form--todo-priority">
+                Priority
+                <select name="edit-todo-priority" id="edit-todo-priority" class="foc input dropBtn">
+                    <option value="none"></option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+            </label>
+        </form>
+        <div class="footBtn">
+            <button type="button" id="cancel-edit-todo" class="fc btn edit-todo--btn--cancel">Cancel</button>
+            <button type="button" id="update-edit-todo" class="fc btn edit-todo--btn--update">Update</button>
+        </div>
+    </dialog>
+    <dialog id="dialog--delete-list" class="dialog delete-list">
+        <div class="dialog-heading">
+            Confirm the deletion of this list.
+        </div>
+        <div class="footBtn delete-list--btn-container">
+            <button type="button" id="cancel-delete-list" class="fc btn">Cancel</button>
+            <button type="button" id="delete-delete-list" class="fc btn">Delete</button>
+        </div>
+    </dialog>
+    <dialog id="dialog--delete-todo" class="dialog delete-todo">
+        <div class="dialog-heading">
+            Confirm the deletion of this todo.
+        </div>
+        <div class="footBtn">
+            <button type="button" id="cancel-delete-todo" class="fc btn">Cancel</button>
+            <button type="button" id="delete-delete-todo" class="fc btn">Delete</button>
+        </div>
+    </dialog>
+    <dialog id="dialog--validation-list-alert" class="dialog validation-list-alert">
+        <div class="dialog-heading">
+            Please complete the name field.
+        </div>
+        <div class="footBtn">
+            <button type="button" id="alert-list-ok" class="fc btn">Ok</button>
+        </div>
+    </dialog>
+    <dialog id="dialog--validation-todo-alert" class="dialog validation-todo-alert">
+        <div class="dialog-heading">
+            Please complete all necessary fields.
+        </div>
+        <div class="footBtn">
+            <button type="button" id="alert-todo-ok" class="fc btn">Ok</button>
+        </div>
+    </dialog>
+    <dialog id="dialog--delete-todo" class="dialog delete-todo">
+        <div class="dialog-heading">
+            Confirm the deletion of this todo.
+        </div>
+        <div class="footBtn">
+            <button type="button" id="cancel-delete-todo" class="fc btn">Cancel</button>
+            <button type="button" id="delete-delete-todo" class="fc btn">Delete</button>
+        </div>
+    </dialog>
+    <dialog id="dialog--local-storage-alert" class="dialog local-storage-alert">
+        <div class="dialog-heading">
+            Unfortunately, your browser configuration will not allow local storage.  Upon refreshing or closing your browser all added data will be deleted.
+        </div>
+        <div class="footBtn">
+            <button type="button" id="alert-local-storage-ok" class="fc btn">Ok</button>
+        </div>
+    </dialog>
+</body>
+</html>
