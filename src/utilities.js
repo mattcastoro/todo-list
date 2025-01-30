@@ -1,7 +1,8 @@
 import { List, Todo } from "./classes.js";
-import { displayListValidationAlert, displayTodoValidationAlert, addList, displayTodos, shiftCompletedTodo, removeList, removeTodo, renderDefaultList, loadDisplay } from "./render.js";
 
-export let lists = [];
+import { storeData, lists } from "./data-storage.js";
+
+import { displayListValidationAlert, displayTodoValidationAlert, addList, displayTodos, shiftCompletedTodo, removeList, removeTodo, renderDefaultList, loadDisplay } from "./render.js";
 
 let listName = document.querySelector("#list-name");
 let defaultList = document.querySelector("#new-make-default");
@@ -17,25 +18,26 @@ let editTodoDueDate = document.querySelector("#edit-todo-due-date");
 let editTodoPriority = document.querySelector("#edit-todo-priority");
 
 export function createList() {
-    validateNewList();
-    console.log(lists);
-    lists.push(new List(listName.value, defaultList.checked));
-    storeData();
-    addList();
-    if (defaultList.checked === true) {
-        setDefaultList(lists[lists.length - 1].listId);
+    if (validateNewList() === "validated") {
+        lists.push(new List(listName.value, defaultList.checked));
+        storeData();
+        addList();
+        if (defaultList.checked === true) {
+            setDefaultList(lists[lists.length - 1].listId);
+        }
+        removeListInputs();
     }
-    removeListInputs();
 }
 
 export function createTodo() {
-    // validateNewTodo(); /** REINSTATE POST TESTING */
-    let [list, listGuid] = retrieveList();
-    let todo = new Todo(todoName.value, todoDesc.value, todoDueDate.value, todoPriority.value, listGuid);
-    list.todos.push(todo);
-    storeData();
-    removeTodoInputs();
-    displayTodos(list.todos, list.name, list.defaultList);
+    if (validateNewTodo() === "validated") {
+        let [list, listGuid] = retrieveList();
+        let todo = new Todo(todoName.value, todoDesc.value, todoDueDate.value, todoPriority.value, listGuid);
+        list.todos.push(todo);
+        storeData();
+        removeTodoInputs();
+        displayTodos(list.todos, list.name, list.defaultList);
+    }
 }
 
 export function showTodoValues(todoGuid) {
@@ -48,15 +50,16 @@ export function showTodoValues(todoGuid) {
 }
 
 export function editTodo(todoGuid) {
-    // validateNewTodo(); /** REINSTATE POST TESTING */
-    let [list, listGuid] = retrieveList();
-    let todo = retrieveTodo(list, todoGuid);
-    todo.name = editTodoName.value;
-    todo.description = editTodoDesc.value;
-    todo.dueDate = editTodoDueDate.value;
-    todo.priority = editTodoPriority.value;
-    storeData();
-    displayTodos(list.todos, list.name, list.defaultList);
+    if (validateNewTodo()) {
+        let [list, listGuid] = retrieveList();
+        let todo = retrieveTodo(list, todoGuid);
+        todo.name = editTodoName.value;
+        todo.description = editTodoDesc.value;
+        todo.dueDate = editTodoDueDate.value;
+        todo.priority = editTodoPriority.value;
+        storeData();
+        displayTodos(list.todos, list.name, list.defaultList);
+    }
 }
 
 export function deleteList(listGuid) {
@@ -189,55 +192,15 @@ export function removeTodoInputs() {
 function validateNewList() {
     if (listName.value == "") {
         displayListValidationAlert.showModal();
+    } else {
+        return "validated";
     }
 }
 
 function validateNewTodo() {
-    if (todoName.value == ""
-        || todoDesc.value == ""
-        || todoDueDate.value == ""
-        || todoPriority.value == "") {
+    if (todoName.value == "") {
             displayTodoValidationAlert.showModal();
+        } else {
+            return "validated";
         }
-}
-
-export function storageAvailable(type) {
-    let storage;
-    try {
-      storage = window[type];
-      const x = "__storage_test__";
-      storage.setItem(x, x);
-      storage.removeItem(x);
-      return true;
-    } catch (e) {
-      return (
-        e instanceof DOMException &&
-        e.name === "QuotaExceededError" &&
-        // acknowledge QuotaExceededError only if there's something already stored
-        storage &&
-        storage.length !== 0
-      );
-    }
-  }
-
-if (storageAvailable("localStorage")) {
-    retrieveData();
-} else {
-    console.log("no local storage");
-    // ADD DIALOG INFORMING THE USER THAT NO LOCAL STORAGE IS AVAILABLE //
-}
-
-function storeData() {
-    localStorage.setItem("lists", JSON.stringify(lists));
-}
-
-function retrieveData() {
-    const storedData = localStorage.getItem("lists");
-    const parsedData = JSON.parse(storedData);
-    lists = parsedData;
-    if (!parsedData) {
-        lists = [];
-    } else {
-        loadDisplay(lists);
-    }
 }

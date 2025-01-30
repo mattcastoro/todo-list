@@ -31,7 +31,7 @@
         <div class="dialog-heading">New List</div>
         <form class="form new-list--form">
             <label class="form--list-name">
-                Name
+                Name*
                 <input type="text" name="list-name" id="list-name" class="foc input" required>
             </label>
             <label class="fc form--make-default">
@@ -48,7 +48,7 @@
         <div class="dialog-heading">New Todo</div>
         <form class="form new-todo--form">
             <label class="form--todo-name">
-                Name
+                Name*
                 <input type="text" name="todo-name" id="todo-name" class="foc input" required>
             </label>
             <label class="form--todo-desc">
@@ -132,7 +132,7 @@
     </dialog>
     <dialog id="dialog--validation-todo-alert" class="dialog validation-todo-alert">
         <div class="dialog-heading">
-            Please complete all fields.
+            Please complete all necessary fields.
         </div>
         <div class="footBtn">
             <button type="button" id="alert-todo-ok" class="fc btn">Ok</button>
@@ -145,6 +145,14 @@
         <div class="footBtn">
             <button type="button" id="cancel-delete-todo" class="fc btn">Cancel</button>
             <button type="button" id="delete-delete-todo" class="fc btn">Delete</button>
+        </div>
+    </dialog>
+    <dialog id="dialog--local-storage-alert" class="dialog local-storage-alert">
+        <div class="dialog-heading">
+            Unfortunately, your browser configuration will not allow local storage.  Upon refreshing or closing your browser all added data will be deleted.
+        </div>
+        <div class="footBtn">
+            <button type="button" id="alert-local-storage-ok" class="fc btn">Ok</button>
         </div>
     </dialog>
 </body>

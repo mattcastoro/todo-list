@@ -1,7 +1,9 @@
 import editTodoImage from "./assets/icon--view-todo.svg";
 import deleteTodoImage from "./assets/icon--delete-todo.svg"
 
-import { createList, createTodo, removeListInputs, removeTodoInputs, lists, setTabs, retrieveList, updateCompleteStatus, setId, editTodo, showTodoValues, updateDeleteButton, deleteList, deleteTodo, updateDefaultCheckbox, setDefaultList, getDefaultList } from "./utilities";
+import { lists } from "./data-storage.js";
+
+import { createList, createTodo, removeListInputs, removeTodoInputs, setTabs, retrieveList, updateCompleteStatus, setId, editTodo, showTodoValues, updateDeleteButton, deleteList, deleteTodo, updateDefaultCheckbox, setDefaultList, getDefaultList } from "./utilities";
 
 export const displayAddList = document.getElementById("dialog--new-list");
 export const displayDeleteList = document.getElementById("dialog--delete-list");
@@ -11,6 +13,7 @@ export const displayDeleteTodo = document.getElementById("dialog--delete-todo");
 export const displayUncompleteTodo = document.getElementById("dialog--uncomplete-todo");
 export const displayListValidationAlert = document.getElementById("dialog--validation-list-alert");
 export const displayTodoValidationAlert = document.getElementById("dialog--validation-todo-alert");
+export const displayLocalStorageAlert = document.getElementById("dialog--local-storage-alert");
 
 export function renderEvents(action, guid, event) {
     switch (action) {
@@ -119,6 +122,11 @@ export function renderEvents(action, guid, event) {
         case "alert-todo-ok":
             displayTodoValidationAlert.close();
             displayAddTodo.showModal();
+            break;
+
+        //LOCAL STORAGE ALERT
+        case "alert-local-storage-ok":
+            displayLocalStorageAlert.close();
             break;
     }
 }
@@ -274,7 +282,6 @@ export function renderDefaultList(newListGuid, oldListGuid) {
 }
 
 export function loadDisplay(pulledLists) {
-    console.log(pulledLists);
     pulledLists.forEach((element) => {
         const listsSection = document.querySelector(".lists-section");
 
@@ -287,7 +294,7 @@ export function loadDisplay(pulledLists) {
             let defaultListBtn = document.querySelector(`#show-list_${element.listId}`);
             list.classList.add("active-tab", "default-list");
             listsSection.insertBefore(defaultListBtn, listsSection.firstChild);
-            displayTodos(element.todos, element.listName, element.defaultList);
+            displayTodos(element.todos, element.name, element.defaultList);
         }
     })
 }
