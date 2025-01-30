@@ -1,7 +1,8 @@
 import { List, Todo } from "./classes.js";
-import { displayListValidationAlert, displayTodoValidationAlert, addList, displayTodos, shiftCompletedTodo, removeList, removeTodo, renderDefaultList } from "./render.js";
+import { displayListValidationAlert, displayTodoValidationAlert, addList, displayTodos, shiftCompletedTodo, removeList, removeTodo, renderDefaultList, loadDisplay } from "./render.js";
 
-export const lists = [];
+export let lists = [];
+
 let listName = document.querySelector("#list-name");
 let defaultList = document.querySelector("#new-make-default");
 
@@ -17,7 +18,9 @@ let editTodoPriority = document.querySelector("#edit-todo-priority");
 
 export function createList() {
     validateNewList();
+    console.log(lists);
     lists.push(new List(listName.value, defaultList.checked));
+    storeData();
     addList();
     if (defaultList.checked === true) {
         setDefaultList(lists[lists.length - 1].listId);
@@ -30,6 +33,7 @@ export function createTodo() {
     let [list, listGuid] = retrieveList();
     let todo = new Todo(todoName.value, todoDesc.value, todoDueDate.value, todoPriority.value, listGuid);
     list.todos.push(todo);
+    storeData();
     removeTodoInputs();
     displayTodos(list.todos, list.name, list.defaultList);
 }
@@ -51,6 +55,7 @@ export function editTodo(todoGuid) {
     todo.description = editTodoDesc.value;
     todo.dueDate = editTodoDueDate.value;
     todo.priority = editTodoPriority.value;
+    storeData();
     displayTodos(list.todos, list.name, list.defaultList);
 }
 
@@ -68,11 +73,13 @@ export function deleteList(listGuid) {
             displayTodos(lastList, lastList.name, lastList.defaultList);
         }
     }
+    storeData();
 } 
 
 export function deleteTodo(todoGuid) {
     let [list, listGuid] = retrieveList();
     list.todos.splice(list.todos.findIndex(index => index.todoId === todoGuid), 1);
+    storeData();
     removeTodo(todoGuid);
 }
 
@@ -99,6 +106,7 @@ export function updateCompleteStatus(guid) {
         todo.complete = "not complete";
         displayTodos(list.todos, list.name, list.defaultList);
     }
+    storeData();
 }
 
 export function retrieveList() {
@@ -149,7 +157,7 @@ export function setDefaultList(listGuid) {
         newDefaultList.defaultList = true;
         renderDefaultList(listGuid, undefined);
     }
-    
+    storeData();
 }
 
 export function getDefaultList() {
@@ -191,4 +199,45 @@ function validateNewTodo() {
         || todoPriority.value == "") {
             displayTodoValidationAlert.showModal();
         }
+}
+
+export function storageAvailable(type) {
+    let storage;
+    try {
+      storage = window[type];
+      const x = "__storage_test__";
+      storage.setItem(x, x);
+      storage.removeItem(x);
+      return true;
+    } catch (e) {
+      return (
+        e instanceof DOMException &&
+        e.name === "QuotaExceededError" &&
+        // acknowledge QuotaExceededError only if there's something already stored
+        storage &&
+        storage.length !== 0
+      );
+    }
+  }
+
+if (storageAvailable("localStorage")) {
+    retrieveData();
+} else {
+    console.log("no local storage");
+    // ADD DIALOG INFORMING THE USER THAT NO LOCAL STORAGE IS AVAILABLE //
+}
+
+function storeData() {
+    localStorage.setItem("lists", JSON.stringify(lists));
+}
+
+function retrieveData() {
+    const storedData = localStorage.getItem("lists");
+    const parsedData = JSON.parse(storedData);
+    lists = parsedData;
+    if (!parsedData) {
+        lists = [];
+    } else {
+        loadDisplay(lists);
+    }
 }

@@ -1,7 +1,7 @@
-import { createList, createTodo, removeListInputs, removeTodoInputs, lists, setTabs, retrieveList, updateCompleteStatus, setId, editTodo, showTodoValues, updateDeleteButton, deleteList, deleteTodo, updateDefaultCheckbox, setDefaultList } from "./utilities";
-
 import editTodoImage from "./assets/icon--view-todo.svg";
 import deleteTodoImage from "./assets/icon--delete-todo.svg"
+
+import { createList, createTodo, removeListInputs, removeTodoInputs, lists, setTabs, retrieveList, updateCompleteStatus, setId, editTodo, showTodoValues, updateDeleteButton, deleteList, deleteTodo, updateDefaultCheckbox, setDefaultList, getDefaultList } from "./utilities";
 
 export const displayAddList = document.getElementById("dialog--new-list");
 export const displayDeleteList = document.getElementById("dialog--delete-list");
@@ -129,6 +129,7 @@ export function addList() {
         listTabs[i].classList.remove("active-tab");
     }
     let lastList = lists.slice(-1);
+    console.log(lastList);
     lastList.forEach((element) => {
         const listSection = document.querySelector(".lists-section");
         const list = document.createElement("button");
@@ -267,8 +268,26 @@ export function renderDefaultList(newListGuid, oldListGuid) {
         oldDefaultListBtn.classList.remove("default-list");
     }
     let listsSection = document.querySelector(".lists-section");
-    let newDefaultlistBtn = document.querySelector(`#show-list_${newListGuid}`);
-    newDefaultlistBtn.classList.add("default-list");
-    listsSection.insertBefore(newDefaultlistBtn, listsSection.firstChild);
+    let newDefaultListBtn = document.querySelector(`#show-list_${newListGuid}`);
+    newDefaultListBtn.classList.add("default-list");
+    listsSection.insertBefore(newDefaultListBtn, listsSection.firstChild);
 }
 
+export function loadDisplay(pulledLists) {
+    console.log(pulledLists);
+    pulledLists.forEach((element) => {
+        const listsSection = document.querySelector(".lists-section");
+
+        const list = document.createElement("button");
+        list.classList.add("fc", "foc", "list-tab");
+        list.setAttribute("id", `show-list_${element.listId}`);
+        list.textContent = element.name;
+        listsSection.appendChild(list);
+        if (element.defaultList === true) {
+            let defaultListBtn = document.querySelector(`#show-list_${element.listId}`);
+            list.classList.add("active-tab", "default-list");
+            listsSection.insertBefore(defaultListBtn, listsSection.firstChild);
+            displayTodos(element.todos, element.listName, element.defaultList);
+        }
+    })
+}
