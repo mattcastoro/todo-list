@@ -2,7 +2,7 @@ import { List, Todo } from "./classes.js";
 
 import { storeData, lists } from "./data-storage.js";
 
-import { displayListValidationAlert, displayTodoValidationAlert, addList, displayTodos, shiftCompletedTodo, removeList, removeTodo, renderDefaultList, loadDisplay } from "./render.js";
+import { displayListValidationAlert, displayTodoValidationAlert, addList, displayTodos, shiftCompletedTodo, removeList, removeTodo, renderDefaultList } from "./render.js";
 
 let listName = document.querySelector("#list-name");
 let defaultList = document.querySelector("#new-make-default");
@@ -50,7 +50,7 @@ export function showTodoValues(todoGuid) {
 }
 
 export function editTodo(todoGuid) {
-    if (validateNewTodo()) {
+    if (validateEditTodo() === "validated") {
         let [list, listGuid] = retrieveList();
         let todo = retrieveTodo(list, todoGuid);
         todo.name = editTodoName.value;
@@ -68,12 +68,18 @@ export function deleteList(listGuid) {
     let defaultList = getDefaultList();
     if (defaultList !== undefined) {
         setTabs("pass", defaultList.listId);
-        displayTodos(defaultList, defaultList.name, defaultList.defaultList);
+        console.log(defaultList);
+        console.log(defaultList.name);
+        console.log(defaultList.defaultList);
+        displayTodos(defaultList.todos, defaultList.name, defaultList.defaultList);
     } else {
         if (lists.length !== 0) {
             let lastList = lists[lists.length - 1];
             setTabs("pass", lastList.listId);
-            displayTodos(lastList, lastList.name, lastList.defaultList);
+            console.log(lastList);
+            console.log(lastList.name);
+            console.log(lastList.defaultList);
+            displayTodos(lastList.todos, lastList.name, lastList.defaultList);
         }
     }
     storeData();
@@ -199,6 +205,14 @@ function validateNewList() {
 
 function validateNewTodo() {
     if (todoName.value == "") {
+            displayTodoValidationAlert.showModal();
+        } else {
+            return "validated";
+        }
+}
+
+function validateEditTodo() {
+    if (editTodoName.value == "") {
             displayTodoValidationAlert.showModal();
         } else {
             return "validated";
